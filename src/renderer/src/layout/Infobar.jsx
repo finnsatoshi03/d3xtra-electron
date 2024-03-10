@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
 import LocationIcon from "../../../../resources/icons/location.png";
-
+import axios from "axios";
 const label =
   "text-xs text-gray200 font-normal flex flex-col relative transition-all duration-300 ease-in-out";
 const input = "text-base text-black font-normal";
@@ -10,8 +10,17 @@ function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit (e) {
     e.preventDefault();
+    const start = 'A'
+    const end = 'B'
+    await axios.get(`http://localhost:5000/api/get/shortest/path/${start}/${end}`)   
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
     console.log("dito mo nalang lagay tol");
   }
 

@@ -14,10 +14,13 @@ function createWindow() {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      nodeIntegration: true, // Make sure nodeIntegration is enabled
+      enableRemoteModule: true, // Enable remote module
+      webSecurity: false, // Disable web security
+      contentSecurityPolicy: "default-src 'self'; connect-src *"
     }
   })
-
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
