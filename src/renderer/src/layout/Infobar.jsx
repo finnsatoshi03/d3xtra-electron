@@ -10,12 +10,17 @@ function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("dito mo nalang lagay tol");
+  }
+
   return (
     <div className="px-12 py-8">
       {/*directions*/}
       <div className="">
         <h1 className="text-sm font-bold">Directions</h1>
-        <form className="my-6">
+        <form className="my-6" onSubmit={handleSubmit}>
           <div className="mb-6 flex gap-4">
             <div className="h-5 w-5 self-end rounded-full border-4 border-gray200">
               <div className="h-full w-full rounded-full border-4 border-black"></div>
@@ -58,6 +63,7 @@ function Infobar() {
               />
             </div>
           </div>
+          <button>Temp Submit</button>
         </form>
       </div>
     </div>
