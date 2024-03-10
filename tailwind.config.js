@@ -2,7 +2,15 @@
 module.exports = {
   content: ['./src/renderer/index.html', './src/renderer/src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        white200: '#ece0e0',
+        gray200: '#D9D9D9'
+      },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif']
+      }
+    }
   },
   plugins: []
 }
