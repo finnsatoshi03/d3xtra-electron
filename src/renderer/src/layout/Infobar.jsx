@@ -1,14 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
+import axios from "axios";
 
 import LocationIcon from "../../../../resources/icons/location.png";
 import DashedIcon from "../../../../resources/icons/dash.png";
-import axios from "axios";
 
-const label =
-  "text-xs text-gray200 font-normal flex flex-col relative transition-all duration-300 ease-in-out";
-const input =
-  "text-base text-black font-normal focus:outline-none transition-all duration-300 ease-in-out";
+import Input from "../components/Input";
 
 function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
@@ -36,27 +33,15 @@ function Infobar() {
         <h1 className="text-sm font-bold">Directions</h1>
         <form className="my-6" onSubmit={handleSubmit}>
           <div className="mb-4 flex gap-4">
-            <div className="h-5 w-5 self-end rounded-full border-4 border-gray200">
+            <div className="h-[1.35rem] w-[1.35rem] self-end rounded-full border-4 border-gray200">
               <div className="h-full w-full rounded-full border-4 border-black"></div>
             </div>
-            <div className="relative">
-              <label
-                htmlFor="current-location"
-                className={`${label} ${currentLocation ? "top-0" : "top-[20px]"}`}
-              >
-                {currentLocation
-                  ? "Your current location"
-                  : "Input your current location"}
-              </label>
-              <input
-                type="text"
-                id="current-location"
-                name="current-location"
-                className={input}
-                value={currentLocation}
-                onChange={(e) => setCurrentLocation(e.target.value)}
-              />
-            </div>
+            <Input
+              label="Your Current Location"
+              placeholder="Input your current location"
+              value={currentLocation}
+              setter={setCurrentLocation}
+            />
           </div>
           <div className="relative">
             <img
@@ -69,22 +54,12 @@ function Infobar() {
             <div className="self-end">
               <img src={LocationIcon} alt="Near Me Icon" className="h-6 w-6" />
             </div>
-            <div className="relative">
-              <label
-                htmlFor="destination"
-                className={`${label} ${destination ? "top-0" : "top-[20px]"}`}
-              >
-                {destination ? "Your destination" : "Input your destination"}
-              </label>
-              <input
-                type="text"
-                id="destination"
-                name="destination"
-                className={input}
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-              />
-            </div>
+            <Input
+              label="Your Destination"
+              placeholder="Input your destination"
+              value={destination}
+              setter={setDestination}
+            />
           </div>
           <button>Temp Submit</button>
         </form>
