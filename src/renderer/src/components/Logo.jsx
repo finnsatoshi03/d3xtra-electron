@@ -8,7 +8,7 @@ function Logo() {
         alt="D3xtra Logo"
         className="w-[150px] py-8 xl:w-[200px]"
       />
-      <button className="rounded-full bg-gray200 px-6 py-2.5 text-xs font-[600]">
+      <button className="rounded-full bg-gray200 px-6 py-2.5 text-xs font-[600] transition-all duration-300 ease-in-out hover:bg-blue200">
         Contact Us
       </button>
     </div>
