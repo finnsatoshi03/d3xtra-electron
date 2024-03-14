@@ -31,16 +31,14 @@ const MyModel = ({ imageVal }) => {
 };
 
 const MapRenderIn3D = ({ imageVal }) => {
-    return (
-        <Canvas>
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-    
-          <MyModel imageVal={imageVal} /> {/* Corrected prop name */}
-    
-          <OrbitControls />
-        </Canvas>
-      );
+  return (
+    <Canvas>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <MyModel imageVal={imageVal} /> {/* Corrected prop name */}
+      <OrbitControls />
+    </Canvas>
+  );
 };
 
 export default MapRenderIn3D;

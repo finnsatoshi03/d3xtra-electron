@@ -1,7 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
+
 import LocationIcon from "../../../../resources/icons/location.png";
+import DashedIcon from "../../../../resources/icons/dash.png";
 import axios from "axios";
+
 const label =
   "text-xs text-gray200 font-normal flex flex-col relative transition-all duration-300 ease-in-out";
 const input = "text-base text-black font-normal";
@@ -10,16 +13,17 @@ function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
 
-  async function handleSubmit (e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const start = 'A'
-    const end = 'B'
-    await axios.get(`http://localhost:5000/api/get/shortest/path/${start}/${end}`)   
-      .then(response => {
+    const start = "A";
+    const end = "B";
+    await axios
+      .get(`http://localhost:5000/api/get/shortest/path/${start}/${end}`)
+      .then((response) => {
         console.log(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
     console.log("dito mo nalang lagay tol");
   }
@@ -30,7 +34,7 @@ function Infobar() {
       <div className="">
         <h1 className="text-sm font-bold">Directions</h1>
         <form className="my-6" onSubmit={handleSubmit}>
-          <div className="mb-6 flex gap-4">
+          <div className="mb-4 flex gap-4">
             <div className="h-5 w-5 self-end rounded-full border-4 border-gray200">
               <div className="h-full w-full rounded-full border-4 border-black"></div>
             </div>
@@ -50,6 +54,13 @@ function Infobar() {
                 onChange={(e) => setCurrentLocation(e.target.value)}
               />
             </div>
+          </div>
+          <div className="relative">
+            <img
+              src={DashedIcon}
+              alt="Dash Line Connect from Point A to B"
+              className="absolute left-[-3px] top-[-13px] m-0 h-[1.7rem] rotate-[-45deg]"
+            />
           </div>
           <div className="flex gap-4">
             <div className="self-end">
