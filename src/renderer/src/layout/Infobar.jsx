@@ -7,7 +7,8 @@ import axios from "axios";
 
 const label =
   "text-xs text-gray200 font-normal flex flex-col relative transition-all duration-300 ease-in-out";
-const input = "text-base text-black font-normal";
+const input =
+  "text-base text-black font-normal focus:outline-none transition-all duration-300 ease-in-out";
 
 function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
@@ -43,7 +44,9 @@ function Infobar() {
                 htmlFor="current-location"
                 className={`${label} ${currentLocation ? "top-0" : "top-[20px]"}`}
               >
-                Your Current Location
+                {currentLocation
+                  ? "Your current location"
+                  : "Input your current location"}
               </label>
               <input
                 type="text"
@@ -71,7 +74,7 @@ function Infobar() {
                 htmlFor="destination"
                 className={`${label} ${destination ? "top-0" : "top-[20px]"}`}
               >
-                Destination
+                {destination ? "Your destination" : "Input your destination"}
               </label>
               <input
                 type="text"
