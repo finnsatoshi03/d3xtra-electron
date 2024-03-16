@@ -1,30 +1,32 @@
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
-
+import Input from "../components/Input";
+import useDijkstra from "../hooks/useDijkstra";
 import axios from "axios";
 import InfobarForm from "../components/InfobarForm";
+
 
 function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
   const [encodedImage, setEncodedImage] = useState("");
+  const setImageData = useDijkstra((state) => state.setSourceImg);
+  const fetchSourceImg = useDijkstra((state) => state.fetchSourceImg);
+
 
   async function handleSubmit(e) {
     e.preventDefault();
     const start = "A";
     const end = "B";
-    await axios
-      .get(`http://localhost:5000/api/get/shortest/path/${start}/${end}`)
-      .then((response) => {
-        // console.log(response.data);
-        const imageData = response.data.data.encoded_image;
-        setEncodedImage(imageData);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-    console.log("dito mo nalang lagay tol");
+    const url = `http://localhost:5000/api/get/shortest/path/${start}/${end}`;
+    fetchSourceImg(url).then((imageData) => {
+      setImageData(`data:image/png;base64,${imageData}`);
+    }).catch((error) => {
+      console.error("Error fetching image:", error);
+    });
   }
+
+
   // handleSubmit()
   return (
     <div className="px-12 py-8">
