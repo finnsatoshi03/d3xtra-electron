@@ -8,8 +8,12 @@ import DashedIcon from "../../../../resources/icons/dash.png";
 function InfobarForm({ handleSubmit }) {
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
+ 
+
+
+
   return (
-    <form className="my-6" onSubmit={handleSubmit}>
+    <form className="my-6" onSubmit={(e) => handleSubmit(e, currentLocation, destination)}>
       <div className="mb-4 flex gap-4">
         <div className="h-[1.35rem] w-[1.35rem] self-end rounded-full border-4 border-gray200">
           <div className="h-full w-full rounded-full border-4 border-black"></div>
