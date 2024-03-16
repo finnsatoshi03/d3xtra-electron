@@ -1,12 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
-import axios from "axios";
-
-import LocationIcon from "../../../../resources/icons/location.png";
-import DashedIcon from "../../../../resources/icons/dash.png";
-
 import Input from "../components/Input";
 import useDijkstra from "../hooks/useDijkstra";
+import axios from "axios";
+import InfobarForm from "../components/InfobarForm";
+
 
 function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
@@ -14,6 +12,7 @@ function Infobar() {
   const [encodedImage, setEncodedImage] = useState("");
   const setImageData = useDijkstra((state) => state.setSourceImg);
   const fetchSourceImg = useDijkstra((state) => state.fetchSourceImg);
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,6 +30,13 @@ function Infobar() {
   // handleSubmit()
   return (
     <div className="px-12 py-8">
+      {/*directions*/}
+      <div className="">
+        <h1 className="text-sm font-bold">Directions</h1>
+        <InfobarForm handleSubmit={handleSubmit} />
+      </div>
+      {/* </div> */}
+
       <h1 className="text-sm font-bold">Directions</h1>
       <button onClick={handleSubmit}>asda</button>
       {encodedImage && (
