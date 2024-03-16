@@ -1,16 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { useState } from "react";
 import axios from "axios";
-
-import LocationIcon from "../../../../resources/icons/location.png";
-import DashedIcon from "../../../../resources/icons/dash.png";
-
-import Input from "../components/Input";
+import InfobarForm from "../components/InfobarForm";
 
 function Infobar() {
-  const [currentLocation, setCurrentLocation] = useState("");
-  const [destination, setDestination] = useState("");
-
   async function handleSubmit(e) {
     e.preventDefault();
     const start = "A";
@@ -31,38 +23,7 @@ function Infobar() {
       {/*directions*/}
       <div className="">
         <h1 className="text-sm font-bold">Directions</h1>
-        <form className="my-6" onSubmit={handleSubmit}>
-          <div className="mb-4 flex gap-4">
-            <div className="h-[1.35rem] w-[1.35rem] self-end rounded-full border-4 border-gray200">
-              <div className="h-full w-full rounded-full border-4 border-black"></div>
-            </div>
-            <Input
-              label="Your Current Location"
-              placeholder="Input your current location"
-              value={currentLocation}
-              setter={setCurrentLocation}
-            />
-          </div>
-          <div className="relative">
-            <img
-              src={DashedIcon}
-              alt="Dash Line Connect from Point A to B"
-              className="absolute left-[-3px] top-[-13px] m-0 h-[1.7rem] rotate-[-45deg]"
-            />
-          </div>
-          <div className="flex gap-4">
-            <div className="self-end">
-              <img src={LocationIcon} alt="Near Me Icon" className="h-6 w-6" />
-            </div>
-            <Input
-              label="Your Destination"
-              placeholder="Input your destination"
-              value={destination}
-              setter={setDestination}
-            />
-          </div>
-          <button>Temp Submit</button>
-        </form>
+        <InfobarForm handleSubmit={handleSubmit} />
       </div>
     </div>
   );
