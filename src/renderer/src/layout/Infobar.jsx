@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+import { useState } from "react";
+
 import axios from "axios";
 import InfobarForm from "../components/InfobarForm";
 
@@ -6,6 +8,7 @@ function Infobar() {
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
   const [encodedImage, setEncodedImage] = useState("");
+
   async function handleSubmit(e) {
     e.preventDefault();
     const start = "A";
