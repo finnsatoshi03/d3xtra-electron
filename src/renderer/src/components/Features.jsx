@@ -30,13 +30,18 @@ function Features({ icon, title }) {
       </div>
       {openSubmenu && (
         <div
-          className="relative left-2 z-10 content-none xl:left-3 "
-          style={{ height: 0, width: 0 }}
+          className="relative left-2 z-10 content-none xl:left-3"
+          style={{ height: 0 }}
         >
           <div
-            className={`absolute rounded-xl bg-red-600 p-8 ${title === "Saved Places" ? "top-[-35px]" : "top-0"}`}
+            className={`absolute w-[250px] rounded-xl bg-[#A8A8A8] bg-opacity-70 px-4 py-2 ${title === "" ? "top-[-35px]" : "top-0"}`}
           >
-            Sample
+            <div>
+              <p className="text-sm font-semibold leading-3">View</p>
+              <p className="text-xs font-normal">
+                View obstacles effortlessly.
+              </p>
+            </div>
           </div>
         </div>
       )}

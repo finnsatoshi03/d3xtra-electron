@@ -11,12 +11,12 @@ export const iconBase = "w-[24px] h-[24px]";
 
 function Sidebar() {
   return (
-    <div className="flex h-full flex-col items-center justify-between">
+    <div className="flex h-full flex-col items-center">
       <div>
         <Logo />
         <Description />
       </div>
-      <div className="mb-8 flex w-full flex-col gap-3 text-[12px] font-bold xl:text-sm">
+      <div className="my-24 mb-8 flex w-full flex-col gap-3 text-[12px] font-bold xl:my-48 xl:text-sm">
         <Features icon={ObstacleIcon} title={"Obstacles"} />
         <Features icon={BookmarkIcon} title={"Saved Places"} />
       </div>
