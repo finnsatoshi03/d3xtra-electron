@@ -44,9 +44,9 @@
   font-style: normal;
 }
 
-.rows > * {
+/* .rows > * {
   border: 1px solid red;
-}
+} */
 
 /* :root {
   --ev-c-white: #ffffff;
