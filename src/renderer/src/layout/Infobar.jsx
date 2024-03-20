@@ -1,11 +1,13 @@
+import useDijkstra from "../hooks/useDijkstra";
+
 import InfobarForm from "../components/InfobarForm";
 import HorizontalLine from "../components/HorizontalLine";
-import useDijkstra from "../hooks/useDijkstra";
 import Mode from "../components/Mode";
+import Route from "../components/Route";
 
 import locationIcon from "../../../../resources/icons/pin_location.png";
 import motorIcon from "../../../../resources/icons/motorcycle.png";
-import Route from "../components/Route";
+import backIcon from "../../../../resources/icons/chevron-left.png";
 
 const tempData = [
   {},
@@ -59,7 +61,7 @@ function Infobar() {
 
   // handleSubmit()
   return (
-    <div className="px-12 py-8">
+    <div className="rows grid grid-rows-[auto_auto_auto_auto_auto_1fr] px-12 py-8">
       {/*directions*/}
       <div className="">
         <h1 className={fontHeader}>Directions</h1>
@@ -92,6 +94,15 @@ function Infobar() {
             routeValue={route.routeValue}
           />
         ))}
+      </div>
+      {/* back */}
+      <div className="self-end">
+        <button className="flex items-center gap-2 font-bold">
+          <span>
+            <img src={backIcon} className="size-3.5" />{" "}
+          </span>
+          Back
+        </button>
       </div>
     </div>
   );
