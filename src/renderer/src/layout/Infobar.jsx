@@ -37,6 +37,13 @@ const routeTempData = [
     routeValue: 12,
     routeUnit: "km.",
   },
+  {
+    value: 3,
+    unit: "hrs.",
+    route: "Dalawang Daan",
+    routeValue: 12,
+    routeUnit: "km.",
+  },
 ];
 
 const fontHeader = "text-sm font-bold";
@@ -61,7 +68,7 @@ function Infobar() {
 
   // handleSubmit()
   return (
-    <div className="rows grid grid-rows-[auto_auto_auto_auto_auto_1fr] px-12 py-8">
+    <div className="rows grid h-screen grid-rows-[auto_auto_auto_auto_230px_1fr] overflow-y-auto overflow-x-hidden px-12 py-8 xl:grid-rows-[auto_auto_auto_auto_350px_1fr]">
       {/*directions*/}
       <div className="">
         <h1 className={fontHeader}>Directions</h1>
@@ -81,19 +88,21 @@ function Infobar() {
       </div>
       <HorizontalLine />
       {/* other routes */}
-      <div className="py-6">
+      <div className="pt-6">
         <h1 className={fontHeader}>Other Routes</h1>
-        {routeTempData.map((route, index) => (
-          <Route
-            key={index}
-            index={index + 1}
-            value={route.value}
-            unit={route.unit}
-            route={route.route}
-            routeUnit={route.routeUnit}
-            routeValue={route.routeValue}
-          />
-        ))}
+        <div className="m-0 h-4/5 overflow-y-auto">
+          {routeTempData.map((route, index) => (
+            <Route
+              key={index}
+              index={index + 1}
+              value={route.value}
+              unit={route.unit}
+              route={route.route}
+              routeUnit={route.routeUnit}
+              routeValue={route.routeValue}
+            />
+          ))}
+        </div>
       </div>
       {/* back */}
       <div className="self-end">
