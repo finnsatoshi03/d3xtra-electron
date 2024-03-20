@@ -5,12 +5,39 @@ import Mode from "../components/Mode";
 
 import locationIcon from "../../../../resources/icons/pin_location.png";
 import motorIcon from "../../../../resources/icons/motorcycle.png";
+import Route from "../components/Route";
 
 const tempData = [
   {},
   { icon: motorIcon, value: 30, unit: "mins." },
   { icon: locationIcon, value: 7.5, unit: "km." },
 ];
+const routeTempData = [
+  {},
+  {
+    value: 32,
+    unit: "mins.",
+    route: "Dating Daan",
+    routeValue: 8.2,
+    routeUnit: "km.",
+  },
+  {
+    value: 1.8,
+    unit: "hrs.",
+    route: "Isang Daan",
+    routeValue: 9.8,
+    routeUnit: "km.",
+  },
+  {
+    value: 3,
+    unit: "hrs.",
+    route: "Dalawang Daan",
+    routeValue: 12,
+    routeUnit: "km.",
+  },
+];
+
+const fontHeader = "text-sm font-bold";
 
 function Infobar() {
   const setImageData = useDijkstra((state) => state.setSourceImg);
@@ -35,7 +62,7 @@ function Infobar() {
     <div className="px-12 py-8">
       {/*directions*/}
       <div className="">
-        <h1 className="text-sm font-bold">Directions</h1>
+        <h1 className={fontHeader}>Directions</h1>
         <InfobarForm handleSubmit={handleSubmit} />
       </div>
       <HorizontalLine />
@@ -47,6 +74,22 @@ function Infobar() {
             icon={mode.icon}
             value={mode.value}
             unit={mode.unit}
+          />
+        ))}
+      </div>
+      <HorizontalLine />
+      {/* other routes */}
+      <div className="py-6">
+        <h1 className={fontHeader}>Other Routes</h1>
+        {routeTempData.map((route, index) => (
+          <Route
+            key={index}
+            index={index + 1}
+            value={route.value}
+            unit={route.unit}
+            route={route.route}
+            routeUnit={route.routeUnit}
+            routeValue={route.routeValue}
           />
         ))}
       </div>
