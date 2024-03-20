@@ -1,5 +1,16 @@
 import InfobarForm from "../components/InfobarForm";
+import HorizontalLine from "../components/HorizontalLine";
 import useDijkstra from "../hooks/useDijkstra";
+import Mode from "../components/Mode";
+
+import locationIcon from "../../../../resources/icons/pin_location.png";
+import motorIcon from "../../../../resources/icons/motorcycle.png";
+
+const tempData = [
+  {},
+  { icon: motorIcon, value: 30, unit: "mins." },
+  { icon: locationIcon, value: 7.5, unit: "km." },
+];
 
 function Infobar() {
   const setImageData = useDijkstra((state) => state.setSourceImg);
@@ -27,46 +38,19 @@ function Infobar() {
         <h1 className="text-sm font-bold">Directions</h1>
         <InfobarForm handleSubmit={handleSubmit} />
       </div>
-      {/* </div> */}
+      <HorizontalLine />
+      {/* modes of destination */}
+      <div className="my-8 flex items-center justify-center gap-2 xl:my-12 xl:gap-6">
+        {tempData.map((mode, index) => (
+          <Mode
+            key={index}
+            icon={mode.icon}
+            value={mode.value}
+            unit={mode.unit}
+          />
+        ))}
+      </div>
     </div>
-    // <div className="px-12 py-8">
-    //   {/*directions*/}
-    //   <div className="">
-    //     <h1 className="text-sm font-bold">Directions</h1>
-    //     <form className="my-6" onSubmit={handleSubmit}>
-    //       <div className="mb-4 flex gap-4">
-    //         <div className="h-[1.35rem] w-[1.35rem] self-end rounded-full border-4 border-gray200">
-    //           <div className="h-full w-full rounded-full border-4 border-black"></div>
-    //         </div>
-    //         <Input
-    //           label="Your Current Location"
-    //           placeholder="Input your current location"
-    //           value={currentLocation}
-    //           setter={setCurrentLocation}
-    //         />
-    //       </div>
-    //       <div className="relative">
-    //         <img
-    //           src={DashedIcon}
-    //           alt="Dash Line Connect from Point A to B"
-    //           className="absolute left-[-3px] top-[-13px] m-0 h-[1.7rem] rotate-[-45deg]"
-    //         />
-    //       </div>
-    //       <div className="flex gap-4">
-    //         <div className="self-end">
-    //           <img src={LocationIcon} alt="Near Me Icon" className="h-6 w-6" />
-    //         </div>
-    //         <Input
-    //           label="Your Destination"
-    //           placeholder="Input your destination"
-    //           value={destination}
-    //           setter={setDestination}
-    //         />
-    //       </div>
-    //       <button>Temp Submit</button>
-    //     </form>
-    //   </div>
-    // </div>
   );
 }
 
