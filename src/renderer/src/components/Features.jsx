@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 import { iconBase, lineBase } from "../layout/Sidebar";
-import LeftIcon from "../../../../resources/icons/chevron-left.png";
+import leftIcon from "../../../../resources/icons/chevron-left.png";
 import Submenu from "./Submenu";
 
 function Features({ icon, title }) {
@@ -24,7 +24,7 @@ function Features({ icon, title }) {
           <p>{title}</p>
         </div>
         <img
-          src={LeftIcon}
+          src={leftIcon}
           alt="Chevron Left Icon"
           className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out group-hover:rotate-0`}
         />
