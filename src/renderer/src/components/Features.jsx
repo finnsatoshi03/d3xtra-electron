@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { iconBase, lineBase } from "../layout/Sidebar";
 import LeftIcon from "../../../../resources/icons/chevron-left.png";
+import Submenu from "./Submenu";
 
 function Features({ icon, title }) {
   const [openSubmenu, setOpenSubmenu] = useState(false);
@@ -28,23 +29,7 @@ function Features({ icon, title }) {
           className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out group-hover:rotate-0`}
         />
       </div>
-      {openSubmenu && (
-        <div
-          className="relative left-2 z-10 content-none xl:left-3"
-          style={{ height: 0 }}
-        >
-          <div
-            className={`absolute w-[250px] rounded-xl bg-[#A8A8A8] bg-opacity-70 px-4 py-2 ${title === "" ? "top-[-35px]" : "top-0"}`}
-          >
-            <div>
-              <p className="text-sm font-semibold leading-3">View</p>
-              <p className="text-xs font-normal">
-                View obstacles effortlessly.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {openSubmenu && <Submenu menuTitle={title} />}
     </div>
   );
 }

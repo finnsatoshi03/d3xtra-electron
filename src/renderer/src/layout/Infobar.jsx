@@ -1,50 +1,12 @@
 import useDijkstra from "../hooks/useDijkstra";
+import { tempData, routeTempData } from "../data/tempData";
 
 import InfobarForm from "../components/InfobarForm";
 import HorizontalLine from "../components/HorizontalLine";
 import Mode from "../components/Mode";
 import Route from "../components/Route";
 
-import locationIcon from "../../../../resources/icons/pin_location.png";
-import motorIcon from "../../../../resources/icons/motorcycle.png";
 import backIcon from "../../../../resources/icons/chevron-left.png";
-
-const tempData = [
-  {},
-  { icon: motorIcon, value: 30, unit: "mins." },
-  { icon: locationIcon, value: 7.5, unit: "km." },
-];
-const routeTempData = [
-  {},
-  {
-    value: 32,
-    unit: "mins.",
-    route: "Dating Daan",
-    routeValue: 8.2,
-    routeUnit: "km.",
-  },
-  {
-    value: 1.8,
-    unit: "hrs.",
-    route: "Isang Daan",
-    routeValue: 9.8,
-    routeUnit: "km.",
-  },
-  {
-    value: 3,
-    unit: "hrs.",
-    route: "Dalawang Daan",
-    routeValue: 12,
-    routeUnit: "km.",
-  },
-  {
-    value: 3,
-    unit: "hrs.",
-    route: "Dalawang Daan",
-    routeValue: 12,
-    routeUnit: "km.",
-  },
-];
 
 const fontHeader = "text-sm font-bold";
 
