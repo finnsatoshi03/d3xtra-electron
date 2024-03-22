@@ -4,7 +4,7 @@ function Input({ value, setter, placeholder, label }) {
     <div className="relative">
       <label
         htmlFor="current-location"
-        className={`pointer-events-none relative flex flex-col text-xs font-normal text-gray200 transition-all duration-300 ease-in-out ${value ? "top-0" : "top-[20px]"}`}
+        className={`pointer-events-none relative flex flex-col text-xs font-normal transition-all duration-300 ease-in-out ${value ? "top-0 text-blue400" : "top-[20px] text-gray200"}`}
       >
         {value ? label : placeholder}
       </label>
