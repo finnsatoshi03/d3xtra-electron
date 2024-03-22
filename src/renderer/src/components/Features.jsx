@@ -7,13 +7,31 @@ import Submenu from "./Submenu";
 
 function Features({ icon, title }) {
   const [openSubmenu, setOpenSubmenu] = useState(false);
+  let closeTimeout = null;
+
+  const handleOpenSubmenu = () => {
+    if (closeTimeout) {
+      clearTimeout(closeTimeout);
+      closeTimeout = null;
+    }
+    setOpenSubmenu(true);
+  };
+
+  const handleCloseSubmenu = () => {
+    closeTimeout = setTimeout(() => {
+      setOpenSubmenu(false);
+      closeTimeout = null;
+    }, 50);
+  };
 
   return (
-    <div className="flex justify-between">
+    <div
+      className="flex justify-between"
+      onMouseEnter={handleOpenSubmenu}
+      onMouseLeave={handleCloseSubmenu}
+    >
       <div
         className={`${lineBase} group mx-10 flex w-full cursor-pointer items-center justify-between pb-2 xl:mx-16`}
-        onMouseEnter={() => setOpenSubmenu(true)}
-        onMouseLeave={() => setOpenSubmenu(false)}
       >
         <div
           className={`flex flex-grow-[0.7] items-center gap-2 rounded-xl bg-transparent transition-colors duration-200 ease-in-out group-hover:bg-blue200`}

@@ -8,7 +8,7 @@ function Submenu({ menuTitle }) {
       style={{ height: 0 }}
     >
       <div
-        className={`absolute flex w-[280px] flex-col gap-4 rounded-xl bg-[#A8A8A8] bg-opacity-70 px-4 py-3 ${menuTitle === "" ? "top-[-35px]" : "top-0"}`}
+        className={`absolute flex w-[280px] flex-col gap-4 rounded-xl bg-[#A8A8A8] bg-opacity-90 px-4 py-3 ${menuTitle === "" ? "top-[-35px]" : "top-0"}`}
       >
         {menuTitle === "Obstacles"
           ? actions.map((action, index) => (

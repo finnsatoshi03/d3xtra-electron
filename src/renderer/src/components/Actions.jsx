@@ -1,6 +1,6 @@
 function Actions({ icon, title, description }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex cursor-pointer items-center gap-3">
       <div className="rounded-lg bg-blue200 p-2">
         <img src={icon} alt="View Icon" className="size-[15px]" />
       </div>
