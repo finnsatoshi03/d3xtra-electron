@@ -1,5 +1,10 @@
-function HorizontalLine() {
-  return <div className="h-0 w-full border border-gray200"></div>;
+function HorizontalLine({ size = "large" }) {
+  const sizes = {
+    medium: "w-2/3",
+    large: "w-full",
+  };
+
+  return <div className={`h-0 ${sizes[size]} border border-gray200`}></div>;
 }
 
 export default HorizontalLine;
