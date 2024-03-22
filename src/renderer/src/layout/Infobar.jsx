@@ -14,7 +14,9 @@ function Infobar() {
       <DestinationModes />
       <HorizontalLine />
       <OtherRoutes />
-      <BackButton />
+      <div className="self-end">
+        <BackButton />
+      </div>
     </div>
   );
 }
