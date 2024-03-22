@@ -1,5 +1,5 @@
-@import './base.css';
-@import './Loading.css';
+@import "./base.css";
+@import "./loading.css";
 
 ::-webkit-scrollbar {
   width: 5px;
