@@ -2,7 +2,7 @@
 @import "./loading.css";
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 5;
 }
 
 ::-webkit-scrollbar-track {
