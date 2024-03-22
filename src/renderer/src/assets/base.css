@@ -44,6 +44,10 @@
   font-style: normal;
 }
 
+/* .rows > * {
+  border: 1px solid red;
+} */
+
 /* :root {
   --ev-c-white: #ffffff;
   --ev-c-white-soft: #f8f8f8;
