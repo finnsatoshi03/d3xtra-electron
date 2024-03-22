@@ -3,7 +3,7 @@ import errorIcon from "../../../../resources/icons/error.png";
 
 function ErrorModal({ message: errorMessage }) {
   return (
-    <>
+    <div className="flex flex-col items-center">
       <img
         src={errorIcon}
         alt="Error Icon"
@@ -11,7 +11,7 @@ function ErrorModal({ message: errorMessage }) {
       />
       <h2>Error</h2>
       <p>{errorMessage || "An error occurred."}</p>
-    </>
+    </div>
   );
 }
 
