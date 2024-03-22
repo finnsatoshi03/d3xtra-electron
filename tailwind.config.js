@@ -15,6 +15,15 @@ module.exports = {
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
       },
+      keyframes: {
+        translateY: {
+          "0%": { transform: "translateY(-15%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        translateY: "translateY 0.15s ease-in-out",
+      },
     },
   },
   plugins: [],
