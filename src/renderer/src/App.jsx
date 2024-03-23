@@ -1,12 +1,12 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { MapProvider } from "./contexts/MapContext";
+
 import AppLayout from "./layout/AppLayout";
 import Home from "./windows/Home";
-import { apiGetMap } from "./services/apiGetMap";
-import { MapProvider } from "./contexts/MapContext";
 
 function App() {
   // const ipcHandle = () => window.electron.ipcRenderer.send('ping')
-  apiGetMap();
+  // apiGetMap();
 
   return (
     <MapProvider>
