@@ -1,10 +1,10 @@
-import mapImage from "../../../../resources/map.png";
-import MapRenderIn3D from "../components/MapRenderIn3D";
+import mapImage from "../../../../resources/map_dextra.png";
+import MapComponent from "../components/MapComponent";
 
 function Home() {
   return (
-    <div className="h-screen bg-[#818286]">
-      <MapRenderIn3D imageVal={mapImage} />
+    <div className="h-screen bg-[#000]">
+      <MapComponent mapImageVal={mapImage} />
     </div>
   );
 }
