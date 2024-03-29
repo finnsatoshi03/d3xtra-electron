@@ -160,9 +160,9 @@ const MapComponent = ({ mapImageVal }) => {
       // Increment the frame counter on each frame
       setFrameCount(frameCount + 1);
 
-      // Only update currentPathIndex every 10 frames
+      // Only update currentPathIndex every 5 frames
       if (
-        frameCount % 10 === 0 &&
+        frameCount % 5 === 0 &&
         currentPathIndex < shortestAndSafestPath.length
       ) {
         setCurrentPathIndex(currentPathIndex + 1);

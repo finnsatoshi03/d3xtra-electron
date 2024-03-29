@@ -23,7 +23,7 @@ function Actions({ icon, title, description, onClick }) {
         />
       </div>
       <div>
-        <p className="text-sm font-semibold leading-3">{title}</p>
+        <p className="text-sm font-semibold">{title}</p>
         <p className="text-xs font-normal leading-3">{description}</p>
       </div>
     </div>
