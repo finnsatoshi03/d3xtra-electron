@@ -11,8 +11,11 @@ import {
 import { DoubleSide, TextureLoader, Vector3 } from "three";
 import { pathCoordinates, nodeCoordinates } from "../data/coordinates";
 import { useBlockedEdge } from "../hooks/useBlockedEdge";
+import { useMaps } from "../contexts/MapContext";
 
-const MapComponent = ({ mapImageVal, insertObstacle = true }) => {
+const MapComponent = ({ mapImageVal }) => {
+  const { isInsertPressed: insertObstacle } = useMaps();
+
   const { getBlockedEdge } = useBlockedEdge();
 
   const [mousePosition, setMousePosition] = useState(null);
