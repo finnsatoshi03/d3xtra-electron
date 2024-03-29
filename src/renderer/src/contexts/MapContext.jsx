@@ -52,6 +52,7 @@ function MapProvider({ children }) {
     async function fetchMap() {
       dispatch({ type: "loading" });
 
+      const base64 = "sht";
       try {
         const res = await fetch(`${BASE_URL}map_graph`, {
           method: "POST",
