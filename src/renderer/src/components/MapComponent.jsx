@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { useState, useRef } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import {
   CameraControls,
   Grid,
@@ -24,14 +24,16 @@ const MapComponent = ({ mapImageVal }) => {
   const [hasObstacle, setHasObstacle] = useState(false);
   const [blockedEdges, setBlockedEdges] = useState([]);
   const [shortestAndSafestPath, setShortestAndSafestPath] = useState([
-    // "A",
-    // "E",
-    // "I",
-    // "J",
-    // "K",
-    // "O",
-    // "T",
+    "A",
+    "E",
+    "I",
+    "J",
+    "K",
+    "O",
+    "T",
   ]);
+  const [currentPathIndex, setCurrentPathIndex] = useState(0);
+  const [frameCount, setFrameCount] = useState(0);
 
   function handleOnPointerMove(event) {
     if (!insertObstacle) return;
@@ -145,14 +147,34 @@ const MapComponent = ({ mapImageVal }) => {
   };
 
   const DrawPath = () => {
-    const coordinatesOfPath = shortestAndSafestPath.map((node) => {
-      // Retrieve the coordinates for the current node from the nodeCoordinates object
-      return nodeCoordinates[node];
+    const coordinatesOfPath = shortestAndSafestPath
+      .slice(0, currentPathIndex)
+      .map((node) => {
+        // Retrieve the coordinates for the current node from the nodeCoordinates object
+        // and convert them to a Vector3 object
+        const [x, y, z] = nodeCoordinates[node];
+        return new Vector3(x, y - 0.2, z);
+      });
+
+    useFrame(() => {
+      // Increment the frame counter on each frame
+      setFrameCount(frameCount + 1);
+
+      // Only update currentPathIndex every 10 frames
+      if (
+        frameCount % 10 === 0 &&
+        currentPathIndex < shortestAndSafestPath.length
+      ) {
+        setCurrentPathIndex(currentPathIndex + 1);
+      }
     });
 
-    // console.log(coordinatesOfPath);
-
-    return <Line points={coordinatesOfPath} lineWidth={5} color={"red"} />;
+    // Only render the Line component when coordinatesOfPath has at least two points
+    return coordinatesOfPath.length >= 2 ? (
+      <Line points={coordinatesOfPath} lineWidth={5} color={"#0f53ff"} />
+    ) : (
+      console.log("No path to draw")
+    );
   };
 
   const Scene = ({ mapVal }) => (
@@ -167,7 +189,7 @@ const MapComponent = ({ mapImageVal }) => {
           color={hasObstacle ? "red" : "orange"}
         />
       )}
-      {/* <DrawPath /> */}
+      <DrawPath />
     </>
   );
 
