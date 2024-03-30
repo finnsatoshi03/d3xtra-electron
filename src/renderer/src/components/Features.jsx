@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { useState } from "react";
 
+import { useMaps } from "../contexts/MapContext";
 import { iconBase } from "../layout/Sidebar";
 import leftIcon from "../../../../resources/icons/chevron-left.png";
 import Submenu from "./Submenu";
 
 function Features({ icon, title }) {
+  const { isInsertPressed } = useMaps();
   const [openSubmenu, setOpenSubmenu] = useState(false);
   let closeTimeout = null;
 
@@ -41,11 +43,17 @@ function Features({ icon, title }) {
           </div>
           <p>{title}</p>
         </div>
-        <img
-          src={leftIcon}
-          alt="Chevron Left Icon"
-          className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out group-hover:rotate-0`}
-        />
+        {isInsertPressed && title === "Obstacles" ? (
+          <div className="rounded-full bg-green-200 px-1.5 py-0.5 text-xs font-normal">
+            Active
+          </div>
+        ) : (
+          <img
+            src={leftIcon}
+            alt="Chevron Left Icon"
+            className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out group-hover:rotate-0`}
+          />
+        )}
       </div>
       {openSubmenu && <Submenu menuTitle={title} />}
     </div>

@@ -18,9 +18,15 @@ function Sidebar() {
         <Description />
         <HorizontalLine size="medium" />
       </div>
-      <div className="my-24 mb-8 flex w-full flex-col gap-3 text-[12px] font-bold xl:my-48 xl:text-sm">
+      <div className="mt-24 flex w-full flex-col gap-3 text-[12px] font-bold xl:mt-48 xl:text-sm">
         <Features icon={ObstacleIcon} title={"Obstacles"} />
         <Features icon={BookmarkIcon} title={"Saved Places"} />
+      </div>
+      <div className="my-4 w-[70%] xl:w-[65%]">
+        <h1 className="text-xs font-semibold uppercase">Dynamic Obstacles</h1>
+        <div className=" flex w-full flex-col rounded-xl bg-gray200 px-3 py-2 ">
+          <div></div>
+        </div>
       </div>
     </div>
   );
