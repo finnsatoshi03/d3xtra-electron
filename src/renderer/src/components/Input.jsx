@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import Autosuggest from "react-autosuggest";
+import searchIcon from "../../../../resources/icons/search.png";
+import { useMaps } from "../contexts/MapContext";
 
 function Input({
   value,
@@ -13,10 +15,10 @@ function Input({
   handleSubmit,
   externalError,
 }) {
+  const { dispatch } = useMaps();
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [pClicked, setPClicked] = useState(false);
 
   const getSuggestions = (value) => {
     const inputValue = value?.trim().toLowerCase();
@@ -60,7 +62,7 @@ function Input({
   };
 
   return (
-    <div className="relative">
+    <div className="children-border relative">
       <label
         htmlFor={id}
         className={`pointer-events-none relative flex flex-col text-xs font-normal transition-all duration-300 ease-in-out ${value ? "top-0 text-blue400" : "top-[20px] text-gray200"} ${error ? "text-red-400" : ""}`}
@@ -71,7 +73,7 @@ function Input({
             ? label
             : placeholder}
       </label>
-      <div className={`flex w-full gap-2 `}>
+      <div className={`inline-flex w-full gap-0`}>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -85,22 +87,25 @@ function Input({
           inputProps={inputProps}
           onSuggestionSelected={onSuggestionSelected}
         />
-        {(isFocused || pClicked) && (
-          <p
-            className="hover:cursor-pointer"
+        {isFocused && (
+          <div
+            className="absolute right-0 hover:cursor-pointer xl:static"
             onMouseDown={() => {
-              // console.log("clicked");
+              if (!value) {
+                setError("Input cannot be empty");
+                return;
+              }
               handleSubmit();
-              setPClicked(true);
+              dispatch({ type: "insert/released" });
             }}
           >
-            sample
-          </p>
+            <img src={searchIcon} className="size-5" />
+          </div>
         )}
       </div>
       {isFocused && (
         <div
-          className={`absolute bottom-0 h-[1px] w-full ${error || externalError ? "bg-red-400" : "bg-blue200"}`}
+          className={`absolute bottom-0 h-[1px] w-[200px] xl:w-full ${error || externalError ? "bg-red-400" : "bg-blue200"}`}
         ></div>
       )}
     </div>

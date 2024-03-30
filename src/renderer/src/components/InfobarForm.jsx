@@ -80,7 +80,6 @@ function InfobarForm({ handleSubmit }) {
           error={destinationError}
         />
       </div>
-      <button disabled={disable}>Temp Submit</button>
     </form>
   );
 }
