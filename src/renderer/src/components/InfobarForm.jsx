@@ -4,7 +4,7 @@ import Input from "./Input";
 
 import LocationIcon from "../../../../resources/icons/location.png";
 import DashedIcon from "../../../../resources/icons/dash.png";
-
+import { apiGetMap } from "../services/apiGetMap";
 function InfobarForm({ handleSubmit }) {
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
@@ -43,7 +43,7 @@ function InfobarForm({ handleSubmit }) {
           setter={setDestination}
         />
       </div>
-      <button>Temp Submit</button>
+      <button onClick={apiGetMap}>Temp Submit</button>
     </form>
   );
 }
