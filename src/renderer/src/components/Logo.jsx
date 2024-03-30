@@ -1,6 +1,7 @@
 import logo from "../../../../resources/d3xtra_logo.png";
 import Modal from "./Modal";
-import Error from "./Error";
+import ContactsCard from "./ContactsCard";
+import { contacts } from "../data/contacts";
 
 function Logo() {
   return (
@@ -15,11 +16,25 @@ function Logo() {
       <Modal>
         <Modal.Open open={"error"}>
           <button className="rounded-full bg-gray200 px-6 py-2.5 text-xs font-[600] transition-all duration-300 ease-in-out hover:bg-blue200">
-            Contact Us
+            Emergency Contacts
           </button>
         </Modal.Open>
         <Modal.Window name={"error"}>
-          <Error />
+          <div>
+            <h1 className="mb-4 text-3xl">Emergecy Contacts</h1>
+            <div className="grid w-[50vw] min-w-0 grid-cols-3 gap-4 xl:gap-8">
+              {contacts.map((contact, index) => (
+                <ContactsCard
+                  key={index}
+                  organization={contact.organization}
+                  number={contact.number}
+                  image={contact.image}
+                  specialties={contact.specialties}
+                  icon={contact.icon}
+                />
+              ))}
+            </div>
+          </div>
         </Modal.Window>
       </Modal>
     </div>

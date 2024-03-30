@@ -33,10 +33,12 @@ function Window({ children, name }) {
   return createPortal(
     <div className="fixed left-0 top-0 z-10 size-full bg-black bg-opacity-5 backdrop-blur-sm transition-all duration-75">
       <div
-        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-gray-300 px-16 py-14 shadow-lg transition-all duration-75"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-gray-300 px-10 py-8 shadow-lg transition-all duration-75"
         ref={modalRef}
       >
-        <button onClick={close}>X</button>
+        <button onClick={close} className="absolute right-6 top-6">
+          X
+        </button>
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </div>
     </div>,
