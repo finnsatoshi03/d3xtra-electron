@@ -9,6 +9,7 @@ const initialState = {
   graph: {},
   paths: [],
   obstacles: [],
+  blockedEdges: [],
   message: "",
   error: "",
   isLoading: "",
