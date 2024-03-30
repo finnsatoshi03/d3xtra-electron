@@ -7,13 +7,15 @@ import LocationIcon from "../../../../resources/icons/location.png";
 import DashedIcon from "../../../../resources/icons/dash.png";
 
 function InfobarForm({ handleSubmit }) {
-  const { graph } = useMaps();
+  const { graph, selectedFeature } = useMaps();
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
 
+  const disable = selectedFeature !== "Interactive Map";
+
   return (
     <form
-      className="my-6"
+      className={`${disable ? "opacity-50" : ""} my-6`}
       onSubmit={(e) => handleSubmit(e, currentLocation, destination, graph)}
     >
       <div className="mb-4 flex gap-4">
@@ -25,6 +27,7 @@ function InfobarForm({ handleSubmit }) {
           placeholder="Input your current location"
           value={currentLocation}
           setter={setCurrentLocation}
+          disabled={disable}
         />
       </div>
       <div className="relative">
@@ -43,9 +46,10 @@ function InfobarForm({ handleSubmit }) {
           placeholder="Input your destination"
           value={destination}
           setter={setDestination}
+          disabled={disable}
         />
       </div>
-      <button>Temp Submit</button>
+      <button disabled={disable}>Temp Submit</button>
     </form>
   );
 }
