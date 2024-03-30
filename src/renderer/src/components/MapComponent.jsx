@@ -18,6 +18,7 @@ const MapComponent = ({ mapImageVal }) => {
     isInsertPressed: insertObstacle,
     paths: shortestAndSafestPath,
     base64map,
+    mapImage,
     dispatch,
   } = useMaps();
 
@@ -33,14 +34,16 @@ const MapComponent = ({ mapImageVal }) => {
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
 
-  const [mapImage, setMapImage] = useState(mapImageVal);
-
-  // dispatch({ type: "base64/encoded", payload: {base64map: "data:image/png;base64," + base64map} });
-
-
   useEffect(() => {
-    base64map ? setMapImage("data:image/png;base64," + base64map) : setMapImage(mapImageVal);
-  }, [base64map]);
+    if (base64map) {
+      dispatch({
+        type: "mapImage/updated",
+        payload: "data:image/png;base64," + base64map,
+      });
+    } else {
+      dispatch({ type: "mapImage/updated", payload: mapImageVal });
+    }
+  }, [base64map, mapImageVal, dispatch]);
 
   useEffect(() => {
     setCurrentPathIndex(0);

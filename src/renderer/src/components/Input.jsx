@@ -9,7 +9,6 @@ function Input({
   setter,
   placeholder,
   label,
-  disabled,
   options,
   id,
   handleSubmit,
@@ -55,7 +54,7 @@ function Input({
     onChange: (event, { newValue }) => {
       setter(newValue);
     },
-    disabled: disabled,
+
     onFocus: () => setIsFocused(true),
     onBlur: () => setIsFocused(false),
     style: { outline: "none" },

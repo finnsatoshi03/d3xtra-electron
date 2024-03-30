@@ -16,7 +16,7 @@ function InfobarForm({ handleSubmit }) {
   const [currentLocationError, setCurrentLocationError] = useState(null);
   const [destinationError, setDestinationError] = useState(null);
 
-  const disable = selectedFeature !== "Interactive Map";
+  // const disable = selectedFeature !== "Interactive Map";
 
   useEffect(() => {
     const nodes = Object.keys(graph);
@@ -34,7 +34,7 @@ function InfobarForm({ handleSubmit }) {
 
   return (
     <form
-      className={`${disable ? "opacity-50" : ""} my-6`}
+      className={`my-6`}
       onSubmit={(e) => handleSubmit(e, currentLocation, destination, graph)}
     >
       <div className="mb-4 flex gap-4">
@@ -46,7 +46,6 @@ function InfobarForm({ handleSubmit }) {
           placeholder="Input your current location"
           value={currentLocation}
           setter={setCurrentLocation}
-          disabled={disable}
           options={currentLocationNodes}
           handleSubmit={() => {
             validateInput("currentLocation");
@@ -71,7 +70,6 @@ function InfobarForm({ handleSubmit }) {
           placeholder="Input your destination"
           value={destination}
           setter={setDestination}
-          disabled={disable}
           options={destinationNodes}
           handleSubmit={() => {
             validateInput("destination");

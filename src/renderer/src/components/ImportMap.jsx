@@ -21,10 +21,7 @@ function ImportMap() {
         .replace(/^.+,/, "");
       // console.log(base64String);
       // console.log(file.name, base64String);
-      dispatch({
-        type: "base64/encoded",
-        payload: { base64map: base64String, mapPath: file.name },
-      });
+      dispatch({ type: "base64/encoded", payload: base64String });
     };
 
     reader.readAsDataURL(file);

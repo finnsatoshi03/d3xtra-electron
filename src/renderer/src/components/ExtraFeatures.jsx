@@ -22,7 +22,7 @@ function ExtraFeatures() {
     dispatch({ type: "feature/selected", payload: feature });
 
     if (feature === "Interactive Map") {
-      dispatch({ type: "base64/encoded", payload: { base64map: "" } });
+      dispatch({ type: "base64/encoded", payload: "" });
     }
   };
 
