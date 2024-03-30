@@ -12,6 +12,8 @@ function InfobarForm({ handleSubmit }) {
   const [destination, setDestination] = useState("");
   const [currentLocationNodes, setCurrentLocationNodes] = useState([]);
   const [destinationNodes, setDestinationNodes] = useState([]);
+  const [currentLocationError, setCurrentLocationError] = useState(null); // Add this line
+  const [destinationError, setDestinationError] = useState(null); // Add this line
 
   const disable = selectedFeature !== "Interactive Map";
 
@@ -20,6 +22,15 @@ function InfobarForm({ handleSubmit }) {
     setCurrentLocationNodes(nodes.filter((node) => node !== destination));
     setDestinationNodes(nodes.filter((node) => node !== currentLocation));
   }, [graph, currentLocation, destination]);
+
+  const validateInput = (inputName) => {
+    // Add this function
+    if (inputName === "currentLocation" && !currentLocation) {
+      setCurrentLocationError("Current location is required");
+    } else if (inputName === "destination" && !destination) {
+      setDestinationError("Destination is required");
+    }
+  };
 
   return (
     <form
@@ -37,6 +48,8 @@ function InfobarForm({ handleSubmit }) {
           setter={setCurrentLocation}
           disabled={disable}
           options={currentLocationNodes}
+          handleSubmit={() => validateInput("currentLocation")}
+          error={currentLocationError}
         />
       </div>
       <div className="relative">
@@ -57,12 +70,11 @@ function InfobarForm({ handleSubmit }) {
           setter={setDestination}
           disabled={disable}
           options={destinationNodes}
-          handleSubmit={() =>
-            handleSubmit(null, currentLocation, destination, graph)
-          }
+          handleSubmit={() => validateInput("destination")}
+          error={destinationError}
         />
       </div>
-      {/* <button disabled={disable}>Temp Submit</button> */}
+      <button disabled={disable}>Temp Submit</button>
     </form>
   );
 }

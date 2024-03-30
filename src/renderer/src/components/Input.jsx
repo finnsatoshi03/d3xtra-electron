@@ -11,6 +11,7 @@ function Input({
   options,
   id,
   handleSubmit,
+  externalError,
 }) {
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(null);
@@ -49,11 +50,7 @@ function Input({
     value,
     onChange: (event, { newValue }) => {
       setter(newValue);
-    },
-    onKeyDown: (event) => {
-      if (event.key === "Enter") {
-        handleSubmit();
-      }
+      handleSubmit();
     },
     disabled: disabled,
   };
@@ -64,7 +61,11 @@ function Input({
         htmlFor={id}
         className={`pointer-events-none relative flex flex-col text-xs font-normal transition-all duration-300 ease-in-out ${value ? "top-0 text-blue400" : "top-[20px] text-gray200"} ${error ? "text-red-400" : ""}`}
       >
-        {error ? error : value ? label : placeholder}
+        {error || externalError
+          ? error || externalError
+          : value
+            ? label
+            : placeholder}
       </label>
       <Autosuggest
         suggestions={suggestions}
