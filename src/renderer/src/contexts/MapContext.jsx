@@ -15,8 +15,8 @@ const initialState = {
   isLoading: "",
   isInsertPressed: false,
   selectedFeature: "Interactive Map",
-  base64map: null,
-  mapPath: null,
+  base64map: "",
+  mapPath: "",
 };
 
 function reducer(state, action) {
