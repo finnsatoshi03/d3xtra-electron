@@ -15,6 +15,8 @@ function Input({
 }) {
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [pClicked, setPClicked] = useState(false);
 
   const getSuggestions = (value) => {
     const inputValue = value?.trim().toLowerCase();
@@ -50,9 +52,11 @@ function Input({
     value,
     onChange: (event, { newValue }) => {
       setter(newValue);
-      handleSubmit();
     },
     disabled: disabled,
+    onFocus: () => setIsFocused(true),
+    onBlur: () => setIsFocused(false),
+    style: { outline: "none" },
   };
 
   return (
@@ -67,19 +71,38 @@ function Input({
             ? label
             : placeholder}
       </label>
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={(suggestion) => suggestion}
-        renderSuggestion={(suggestion) => (
-          <div className="absolute -bottom-[2.1rem] z-30 w-full rounded-b-lg border-x border-b border-x-gray200 border-b-gray200 bg-white px-4 py-1 shadow-md">
-            {suggestion}
-          </div>
+      <div className={`flex w-full gap-2 `}>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={(suggestion) => suggestion}
+          renderSuggestion={(suggestion) => (
+            <div className="absolute -bottom-[2.1rem] z-30 w-full rounded-b-lg border-x border-b border-x-gray200 border-b-gray200 bg-white px-4 py-1 shadow-md">
+              {suggestion}
+            </div>
+          )}
+          inputProps={inputProps}
+          onSuggestionSelected={onSuggestionSelected}
+        />
+        {(isFocused || pClicked) && (
+          <p
+            className="hover:cursor-pointer"
+            onMouseDown={() => {
+              // console.log("clicked");
+              handleSubmit();
+              setPClicked(true);
+            }}
+          >
+            sample
+          </p>
         )}
-        inputProps={inputProps}
-        onSuggestionSelected={onSuggestionSelected}
-      />
+      </div>
+      {isFocused && (
+        <div
+          className={`absolute bottom-0 h-[1px] w-full ${error || externalError ? "bg-red-400" : "bg-blue200"}`}
+        ></div>
+      )}
     </div>
   );
 }

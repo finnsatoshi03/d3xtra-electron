@@ -25,7 +25,6 @@ function InfobarForm({ handleSubmit }) {
   }, [graph, currentLocation, destination]);
 
   const validateInput = (inputName) => {
-    // Add this function
     if (inputName === "currentLocation" && !currentLocation) {
       setCurrentLocationError("Current location is required");
     } else if (inputName === "destination" && !destination) {
@@ -49,7 +48,10 @@ function InfobarForm({ handleSubmit }) {
           setter={setCurrentLocation}
           disabled={disable}
           options={currentLocationNodes}
-          handleSubmit={() => validateInput("currentLocation")}
+          handleSubmit={() => {
+            validateInput("currentLocation");
+            handleSubmit(null, currentLocation, destination, graph);
+          }}
           error={currentLocationError}
         />
       </div>
@@ -71,7 +73,10 @@ function InfobarForm({ handleSubmit }) {
           setter={setDestination}
           disabled={disable}
           options={destinationNodes}
-          handleSubmit={() => validateInput("destination")}
+          handleSubmit={() => {
+            validateInput("destination");
+            handleSubmit(null, currentLocation, destination, graph);
+          }}
           error={destinationError}
         />
       </div>

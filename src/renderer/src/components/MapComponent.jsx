@@ -122,15 +122,23 @@ const MapComponent = ({ mapImageVal }) => {
       <group>
         <mesh
           rotation-x={-Math.PI / 2}
-          onPointerMove={insertObstacle ? handleOnPointerMove : undefined}
-          onClick={insertObstacle ? handleOnClick : undefined}
+          onPointerMove={
+            insertObstacle && shortestAndSafestPath.length === 0
+              ? handleOnPointerMove
+              : undefined
+          }
+          onClick={
+            insertObstacle && shortestAndSafestPath.length === 0
+              ? handleOnClick
+              : undefined
+          }
           position={[0, -0.01, 0]}
           userData={{ name: "ground" }}
         >
           <planeGeometry args={[20.4, 20.4]} />
           <meshBasicMaterial map={dextraMap} side={DoubleSide} />
         </mesh>
-        {insertObstacle && (
+        {insertObstacle && shortestAndSafestPath.length === 0 && (
           <Grid
             args={[20, 20]}
             cellColor={"white"}
