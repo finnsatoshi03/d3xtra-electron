@@ -1,18 +1,20 @@
 import { useState } from "react";
+import { useMaps } from "../contexts/MapContext";
 
 import Input from "./Input";
 
 import LocationIcon from "../../../../resources/icons/location.png";
 import DashedIcon from "../../../../resources/icons/dash.png";
-import { apiGetMap } from "../services/apiGetMap";
+
 function InfobarForm({ handleSubmit }) {
+  const { graph } = useMaps();
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
 
   return (
     <form
       className="my-6"
-      onSubmit={(e) => handleSubmit(e, currentLocation, destination)}
+      onSubmit={(e) => handleSubmit(e, currentLocation, destination, graph)}
     >
       <div className="mb-4 flex gap-4">
         <div className="h-[1.35rem] w-[1.35rem] self-end rounded-full border-4 border-gray200">
@@ -43,7 +45,7 @@ function InfobarForm({ handleSubmit }) {
           setter={setDestination}
         />
       </div>
-      <button onClick={apiGetMap}>Temp Submit</button>
+      <button>Temp Submit</button>
     </form>
   );
 }
