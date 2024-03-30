@@ -37,7 +37,7 @@ function Features({ icon, title, disable }) {
       onMouseLeave={handleCloseSubmenu}
     >
       <div
-        className={`mx-10 flex w-full items-center justify-between border-b-2 border-gray200 pb-2 xl:mx-16 ${disable ? "cursor-not-allowed opacity-50" : "group cursor-pointer"}`}
+        className={`mx-10 flex w-full items-center justify-between border-b-2 border-gray200 pb-2 xl:mx-16 ${disable ? "cursor-disable opacity-50" : "group cursor-pointer"}`}
       >
         <div
           className={`flex flex-grow-[0.7] items-center gap-2 rounded-xl bg-transparent transition-colors duration-200 ease-in-out group-hover:bg-blue200 `}
@@ -55,7 +55,7 @@ function Features({ icon, title, disable }) {
           <img
             src={leftIcon}
             alt="Chevron Left Icon"
-            className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out`}
+            className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out group-hover:rotate-0`}
           />
         )}
       </div>

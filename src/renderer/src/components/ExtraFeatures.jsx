@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
 import interactiveIcon from "../../../../resources/icons/interactive.png";
@@ -15,6 +16,7 @@ const features = [
 
 function ExtraFeatures() {
   const { selectedFeature, dispatch } = useMaps();
+  const isDynamicMap = selectedFeature === "Dynamic Map";
 
   const handleSelectFeature = (feature) => {
     dispatch({ type: "feature/selected", payload: feature });
@@ -37,11 +39,13 @@ function ExtraFeatures() {
           />
         ))}
       </div>
+      {isDynamicMap && <ImportMap />}
     </div>
   );
 }
 
 function Features({ title, description, icon, isSelected, onSelect }) {
+  const { selectedFeature } = useMaps();
   return (
     <div
       className={`flex w-full items-center justify-between gap-4 p-[3%] hover:cursor-pointer ${
@@ -66,6 +70,20 @@ function Features({ title, description, icon, isSelected, onSelect }) {
         checked={isSelected}
         disabled={!isSelected}
       />
+    </div>
+  );
+}
+
+function ImportMap() {
+  return (
+    <div className="mt-2 w-full rounded-xl bg-gray200 bg-opacity-30 px-[3%] py-[1%] text-xs font-semibold shadow-md xl:text-sm">
+      <div className="flex w-full flex-col items-center justify-center p-[3%]">
+        <h1 className="text-base">Import Your Map</h1>
+        <p className="w-3/4 text-center text-[10px] font-normal leading-3">
+          Upload a <span className="font-bold text-[#005cc8]">custom map</span>{" "}
+          with your obstacles
+        </p>
+      </div>
     </div>
   );
 }
