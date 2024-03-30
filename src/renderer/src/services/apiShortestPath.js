@@ -22,7 +22,7 @@ export async function getShortestPath(startNode, targetNode, graph, dispatch) {
       throw new Error(response.data.message);
     }
   } catch (error) {
-    console.error(error);
+    dispatch({ type: "path/error", payload: error.message });
     return null;
   }
 }

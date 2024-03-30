@@ -12,14 +12,13 @@ function Logo() {
         className="w-[150px] py-6 xl:w-[200px] xl:py-8"
       />
 
-      {/* temp use of Modal */}
       <Modal>
-        <Modal.Open open={"error"}>
+        <Modal.Open open={"contacts"}>
           <button className="rounded-full bg-gray200 px-6 py-2.5 text-xs font-[600] transition-all duration-300 ease-in-out hover:bg-blue200">
             Emergency Contacts
           </button>
         </Modal.Open>
-        <Modal.Window name={"error"}>
+        <Modal.Window name={"contacts"}>
           <div>
             <h1 className="mb-4 text-3xl">Emergecy Contacts</h1>
             <div className="grid w-[50vw] min-w-0 grid-cols-3 gap-4 xl:gap-8">

@@ -3,7 +3,7 @@ import { cloneElement, createContext, useContext, useState } from "react";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { createPortal } from "react-dom";
 
-const ModalContext = createContext();
+export const ModalContext = createContext();
 
 function Modal({ children }) {
   const [openName, setOpenName] = useState("");
