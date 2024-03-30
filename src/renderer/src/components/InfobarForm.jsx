@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMaps } from "../contexts/MapContext";
 
 import Input from "./Input";
@@ -10,8 +10,16 @@ function InfobarForm({ handleSubmit }) {
   const { graph, selectedFeature } = useMaps();
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
+  const [currentLocationNodes, setCurrentLocationNodes] = useState([]);
+  const [destinationNodes, setDestinationNodes] = useState([]);
 
   const disable = selectedFeature !== "Interactive Map";
+
+  useEffect(() => {
+    const nodes = Object.keys(graph);
+    setCurrentLocationNodes(nodes.filter((node) => node !== destination));
+    setDestinationNodes(nodes.filter((node) => node !== currentLocation));
+  }, [graph, currentLocation, destination]);
 
   return (
     <form
@@ -28,6 +36,7 @@ function InfobarForm({ handleSubmit }) {
           value={currentLocation}
           setter={setCurrentLocation}
           disabled={disable}
+          options={currentLocationNodes}
         />
       </div>
       <div className="relative">
@@ -47,6 +56,7 @@ function InfobarForm({ handleSubmit }) {
           value={destination}
           setter={setDestination}
           disabled={disable}
+          options={destinationNodes}
         />
       </div>
       <button disabled={disable}>Temp Submit</button>

@@ -4,7 +4,7 @@ import { getShortestPath } from "../services/apiShortestPath";
 import InfobarForm from "./InfobarForm";
 
 function Directions() {
-  const { dispatch } = useMaps();
+  const { dispatch, error } = useMaps();
 
   async function handleSubmit(e, currentLocation, destination, graph) {
     e.preventDefault();

@@ -27,15 +27,6 @@ const MapComponent = ({ mapImageVal }) => {
   const [obstacles, setObstacles] = useState([]);
   const [hasObstacle, setHasObstacle] = useState(false);
   const [blockedEdges, setBlockedEdges] = useState([]);
-  // const [shortestAndSafestPath, setShortestAndSafestPath] = useState([
-  //   // "A",
-  //   // "E",
-  //   // "I",
-  //   // "J",
-  //   // "K",
-  //   // "O",
-  //   // "T",
-  // ]);
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
 
@@ -51,7 +42,7 @@ const MapComponent = ({ mapImageVal }) => {
   }, [insertObstacle, dispatch]);
 
   function handleOnPointerMove(event) {
-    if (!insertObstacle) return;
+    if (!insertObstacle || shortestAndSafestPath.length > 0) return;
 
     const { point } = event;
 
@@ -74,7 +65,6 @@ const MapComponent = ({ mapImageVal }) => {
 
     setShowHighlightPlane(isOnPath);
     setMousePosition(isOnPath ? highlightPosition : null);
-    // setMousePosition(highlightPosition);
   }
 
   function handleOnClick(event) {
