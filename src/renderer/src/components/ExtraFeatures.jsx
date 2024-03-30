@@ -23,6 +23,9 @@ function ExtraFeatures() {
 
     if (feature === "Interactive Map") {
       dispatch({ type: "base64/encoded", payload: "" });
+      dispatch({ type: "path/reset" });
+      dispatch({ type: "currentLocation/updated", payload: "" });
+      dispatch({ type: "destination/updated", payload: "" });
     }
   };
 

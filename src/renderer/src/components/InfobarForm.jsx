@@ -8,9 +8,8 @@ import LocationIcon from "../../../../resources/icons/location.png";
 import DashedIcon from "../../../../resources/icons/dash.png";
 
 function InfobarForm({ handleSubmit }) {
-  const { graph, selectedFeature } = useMaps();
-  const [currentLocation, setCurrentLocation] = useState("");
-  const [destination, setDestination] = useState("");
+  const { graph, selectedFeature, currentLocation, destination, dispatch } =
+    useMaps();
   const [currentLocationNodes, setCurrentLocationNodes] = useState([]);
   const [destinationNodes, setDestinationNodes] = useState([]);
   const [currentLocationError, setCurrentLocationError] = useState(null);
@@ -45,7 +44,12 @@ function InfobarForm({ handleSubmit }) {
           label="Your Current Location"
           placeholder="Input your current location"
           value={currentLocation}
-          setter={setCurrentLocation}
+          setter={(value) =>
+            dispatch({
+              type: "currentLocation/updated",
+              payload: value,
+            })
+          }
           options={currentLocationNodes}
           handleSubmit={() => {
             validateInput("currentLocation");
@@ -69,7 +73,12 @@ function InfobarForm({ handleSubmit }) {
           label="Your Destination"
           placeholder="Input your destination"
           value={destination}
-          setter={setDestination}
+          setter={(value) =>
+            dispatch({
+              type: "destination/updated",
+              payload: value,
+            })
+          }
           options={destinationNodes}
           handleSubmit={() => {
             validateInput("destination");
