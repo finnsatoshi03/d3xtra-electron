@@ -3,7 +3,7 @@ import { useMaps } from "../contexts/MapContext";
 
 import Sidebar from "./Sidebar";
 import Infobar from "./Infobar";
-import Loading from "../components/loadingMaze";
+import Loading from "../components/LoadingMaze";
 
 function AppLayout() {
   const { isLoading } = useMaps();

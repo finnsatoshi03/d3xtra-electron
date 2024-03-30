@@ -7,8 +7,6 @@ export function apiGetMap() {
   useEffect(function () {
     async function getMap() {
       try {
-        
-        
         const fetchMap = await fetch(`${URL}map_graph`);
         const res = await fetchMap.json();
         console.log(res);
