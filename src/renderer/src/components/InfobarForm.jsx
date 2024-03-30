@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useMaps } from "../contexts/MapContext";
 
@@ -12,8 +13,8 @@ function InfobarForm({ handleSubmit }) {
   const [destination, setDestination] = useState("");
   const [currentLocationNodes, setCurrentLocationNodes] = useState([]);
   const [destinationNodes, setDestinationNodes] = useState([]);
-  const [currentLocationError, setCurrentLocationError] = useState(null); // Add this line
-  const [destinationError, setDestinationError] = useState(null); // Add this line
+  const [currentLocationError, setCurrentLocationError] = useState(null);
+  const [destinationError, setDestinationError] = useState(null);
 
   const disable = selectedFeature !== "Interactive Map";
 
