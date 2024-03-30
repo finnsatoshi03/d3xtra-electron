@@ -66,6 +66,9 @@ function reducer(state, action) {
     case "path/loaded":
       return { ...state, paths: action.payload };
 
+    case "path/reset":
+      return { ...state, paths: [] };
+
     case "feature/selected":
       return {
         ...state,
