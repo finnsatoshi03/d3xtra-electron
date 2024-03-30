@@ -119,6 +119,7 @@ function MapProvider({ children }) {
   useEffect(function () {
     async function fetchMap() {
       dispatch({ type: "loading" });
+      console.log(base64map ? "base64" : "nada");
 
       try {
         const base64 =
@@ -136,60 +137,23 @@ function MapProvider({ children }) {
             message: data.data.message,
           },
         });
-      } catch (error) {
-        dispatch({ type: "rejected", payload: error });
-      }
-    }
-    fetchMap();
-  }, []);
 
-  useEffect(
-    function () {
-      async function fetchMapImage() {
-        if (!mapImage) {
-          return;
-        }
-
-        dispatch({ type: "loading" });
-
-        console.log(mapImage.replace("data:image/png;base64,/", ""));
-
-        try {
-          const base64EncodedMap = mapImage.replace(
-            "data:image/png;base64,/",
-            "",
-          );
-          console.log(base64EncodedMap);
-          const res = await axios.post(`${BASE_URL}map_graph`, {
-            base64EncodedMap,
-          });
-          const data = res.data;
-          console.log(data);
-          dispatch({
-            type: "map/loaded",
-            payload: {
-              graph: data.data.graph,
-              blockedEdges: data.data.blockedEdges,
-              message: data.data.message,
-            },
-          });
-
+        if (base64map) {
           const startNode = "A";
-          const targetNode = "T";
+          const targetNode = "J";
           await getShortestPath(
             startNode,
             targetNode,
             data.data.graph,
             dispatch,
           );
-        } catch (error) {
-          dispatch({ type: "rejected", payload: error });
         }
+      } catch (error) {
+        dispatch({ type: "rejected", payload: error });
       }
-      fetchMapImage();
-    },
-    [mapImage],
-  );
+    }
+    fetchMap();
+  }, []);
 
   const value = useMemo(
     () => ({
