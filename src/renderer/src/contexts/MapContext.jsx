@@ -150,6 +150,7 @@ function MapProvider({ children }) {
           });
 
           if (base64map && currentLocation && destination) {
+            console.log("huh?");
             await getShortestPath(
               currentLocation,
               destination,

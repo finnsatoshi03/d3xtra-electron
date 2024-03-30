@@ -19,9 +19,16 @@ function ExtraFeatures() {
   const isDynamicMap = selectedFeature === "Dynamic Map";
 
   const handleSelectFeature = (feature) => {
+    if (selectedFeature === feature) {
+      return;
+    }
+
     dispatch({ type: "feature/selected", payload: feature });
 
-    if (feature === "Interactive Map") {
+    if (
+      feature !== "Interactive Map" ||
+      (isDynamicMap && feature === "Interactive Map")
+    ) {
       dispatch({ type: "base64/encoded", payload: "" });
       dispatch({ type: "path/reset" });
       dispatch({ type: "currentLocation/updated", payload: "" });
