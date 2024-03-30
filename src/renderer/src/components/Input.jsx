@@ -1,7 +1,17 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Autosuggest from "react-autosuggest";
 
-function Input({ value, setter, placeholder, label, disabled, options, id }) {
+function Input({
+  value,
+  setter,
+  placeholder,
+  label,
+  disabled,
+  options,
+  id,
+  handleSubmit,
+}) {
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(null);
 
@@ -14,6 +24,11 @@ function Input({ value, setter, placeholder, label, disabled, options, id }) {
       : options?.filter(
           (option) => option.toLowerCase().slice(0, inputLength) === inputValue,
         );
+  };
+
+  const onSuggestionSelected = (event, { suggestion }) => {
+    setter(suggestion);
+    handleSubmit();
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {
@@ -34,6 +49,11 @@ function Input({ value, setter, placeholder, label, disabled, options, id }) {
     value,
     onChange: (event, { newValue }) => {
       setter(newValue);
+    },
+    onKeyDown: (event) => {
+      if (event.key === "Enter") {
+        handleSubmit();
+      }
     },
     disabled: disabled,
   };
@@ -57,6 +77,7 @@ function Input({ value, setter, placeholder, label, disabled, options, id }) {
           </div>
         )}
         inputProps={inputProps}
+        onSuggestionSelected={onSuggestionSelected}
       />
     </div>
   );

@@ -7,7 +7,9 @@ function Directions() {
   const { dispatch, error } = useMaps();
 
   async function handleSubmit(e, currentLocation, destination, graph) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     getShortestPath(currentLocation, destination, graph, dispatch);
   }
 

@@ -57,9 +57,12 @@ function InfobarForm({ handleSubmit }) {
           setter={setDestination}
           disabled={disable}
           options={destinationNodes}
+          handleSubmit={() =>
+            handleSubmit(null, currentLocation, destination, graph)
+          }
         />
       </div>
-      <button disabled={disable}>Temp Submit</button>
+      {/* <button disabled={disable}>Temp Submit</button> */}
     </form>
   );
 }
