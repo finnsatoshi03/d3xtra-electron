@@ -12,8 +12,8 @@ export const useBlockedEdge = () => {
     if (index >= 25 && index <= 27) return 9;
     if (index >= 28 && index <= 30) return 10;
     if (index >= 31 && index <= 33) return 11;
-    if (index >= 34 && index <= 36) return 12;
-    if (index >= 37 && index <= 39) return 13;
+    if (index >= 34 && index <= 36) return 13;
+    if (index >= 37 && index <= 39) return 12;
     if (index >= 40 && index <= 42) return 14;
     if (index >= 43 && index <= 45) return 15;
     if (index >= 46 && index <= 48) return 16;

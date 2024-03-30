@@ -17,8 +17,11 @@ const MapComponent = ({ mapImageVal }) => {
   const {
     isInsertPressed: insertObstacle,
     paths: shortestAndSafestPath,
+    base64map,
     dispatch,
   } = useMaps();
+
+  // console.log(base64map);
 
   const { getBlockedEdge } = useBlockedEdge();
 
@@ -29,6 +32,15 @@ const MapComponent = ({ mapImageVal }) => {
   const [blockedEdges, setBlockedEdges] = useState([]);
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
+
+  const [mapImage, setMapImage] = useState(mapImageVal);
+
+  // dispatch({ type: "base64/encoded", payload: {base64map: "data:image/png;base64," + base64map} });
+
+
+  useEffect(() => {
+    base64map ? setMapImage("data:image/png;base64," + base64map) : setMapImage(mapImageVal);
+  }, [base64map]);
 
   useEffect(() => {
     setCurrentPathIndex(0);
@@ -116,7 +128,7 @@ const MapComponent = ({ mapImageVal }) => {
   }
 
   const Plane = ({ mapVal }) => {
-    const dextraMap = useLoader(TextureLoader, mapVal);
+    const dextraMap = useLoader(TextureLoader, mapImage);
 
     return (
       <group>
