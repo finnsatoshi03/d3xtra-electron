@@ -14,6 +14,7 @@ const initialState = {
   error: "",
   isLoading: "",
   isInsertPressed: false,
+  selectedFeature: "Interactive Map",
 };
 
 function reducer(state, action) {
@@ -29,6 +30,15 @@ function reducer(state, action) {
         blockedEdges: action.payload.blockedEdges,
         message: action.payload.message,
       };
+
+    case "rejected":
+      return { ...state, isLoading: false, error: action.payload };
+
+    case "insert/pressed":
+      return { ...state, isInsertPressed: true };
+
+    case "insert/released":
+      return { ...state, isInsertPressed: false };
 
     case "insert/obstacle": {
       const { obstaclePosition, blockedEdgeIndex } = action.payload;
@@ -51,14 +61,11 @@ function reducer(state, action) {
       };
     }
 
-    case "rejected":
-      return { ...state, isLoading: false, error: action.payload };
-
-    case "insert/pressed":
-      return { ...state, isInsertPressed: true };
-
-    case "insert/released":
-      return { ...state, isInsertPressed: false };
+    case "feature/selected":
+      return {
+        ...state,
+        selectedFeature: action.payload,
+      };
 
     default:
       return new Error("Unknown Action");
@@ -67,11 +74,21 @@ function reducer(state, action) {
 
 function MapProvider({ children }) {
   const [
-    { graph, paths, message, error, isLoading, isInsertPressed, blockedEdges },
+    {
+      graph,
+      paths,
+      message,
+      error,
+      isLoading,
+      isInsertPressed,
+      blockedEdges,
+      obstacles,
+      selectedFeature,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
-  console.log("graph", graph);
-  console.log("blockedEdges", blockedEdges);
+  // console.log("graph", graph);
+  // console.log("blockedEdges", blockedEdges);
 
   useEffect(function () {
     async function fetchMap() {
@@ -104,10 +121,13 @@ function MapProvider({ children }) {
       value={{
         graph,
         paths,
+        blockedEdges,
+        obstacles,
         message,
         error,
         isLoading,
         isInsertPressed,
+        selectedFeature,
         dispatch,
       }}
     >

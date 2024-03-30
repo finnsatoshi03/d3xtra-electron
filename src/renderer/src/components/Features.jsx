@@ -6,12 +6,15 @@ import { iconBase } from "../layout/Sidebar";
 import leftIcon from "../../../../resources/icons/chevron-left.png";
 import Submenu from "./Submenu";
 
-function Features({ icon, title }) {
-  const { isInsertPressed } = useMaps();
+function Features({ icon, title, disable }) {
+  const { isInsertPressed, selectedFeature } = useMaps();
   const [openSubmenu, setOpenSubmenu] = useState(false);
   let closeTimeout = null;
 
+  disable = title === "Obstacles" && selectedFeature !== "Interactive Map";
+
   const handleOpenSubmenu = () => {
+    if (disable) return;
     if (closeTimeout) {
       clearTimeout(closeTimeout);
       closeTimeout = null;
@@ -20,6 +23,7 @@ function Features({ icon, title }) {
   };
 
   const handleCloseSubmenu = () => {
+    if (disable) return;
     closeTimeout = setTimeout(() => {
       setOpenSubmenu(false);
       closeTimeout = null;
@@ -33,10 +37,10 @@ function Features({ icon, title }) {
       onMouseLeave={handleCloseSubmenu}
     >
       <div
-        className={`group mx-10 flex w-full cursor-pointer items-center justify-between border-b-2 border-gray200 pb-2 xl:mx-16`}
+        className={`mx-10 flex w-full items-center justify-between border-b-2 border-gray200 pb-2 xl:mx-16 ${disable ? "cursor-not-allowed opacity-50" : "group cursor-pointer"}`}
       >
         <div
-          className={`flex flex-grow-[0.7] items-center gap-2 rounded-xl bg-transparent transition-colors duration-200 ease-in-out group-hover:bg-blue200`}
+          className={`flex flex-grow-[0.7] items-center gap-2 rounded-xl bg-transparent transition-colors duration-200 ease-in-out group-hover:bg-blue200 `}
         >
           <div className="rounded-xl bg-blue200 p-2 group-hover:bg-transparent">
             <img src={icon} alt="Road Close Icon" className={iconBase} />
@@ -51,7 +55,7 @@ function Features({ icon, title }) {
           <img
             src={leftIcon}
             alt="Chevron Left Icon"
-            className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out group-hover:rotate-0`}
+            className={`h-[19px] w-[19px] rotate-180 transition-transform duration-300 ease-in-out`}
           />
         )}
       </div>

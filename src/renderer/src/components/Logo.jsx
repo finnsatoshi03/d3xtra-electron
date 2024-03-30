@@ -5,11 +5,11 @@ import { contacts } from "../data/contacts";
 
 function Logo() {
   return (
-    <div className={`flex flex-col items-center pb-8`}>
+    <div className={`flex flex-col items-center pb-6 xl:pb-8`}>
       <img
         src={logo}
         alt="D3xtra Logo"
-        className="w-[150px] py-8 xl:w-[200px]"
+        className="w-[150px] py-6 xl:w-[200px] xl:py-8"
       />
 
       {/* temp use of Modal */}
