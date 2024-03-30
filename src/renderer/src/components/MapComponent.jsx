@@ -14,7 +14,11 @@ import { useBlockedEdge } from "../hooks/useBlockedEdge";
 import { useMaps } from "../contexts/MapContext";
 
 const MapComponent = ({ mapImageVal }) => {
-  const { isInsertPressed: insertObstacle, dispatch } = useMaps();
+  const {
+    isInsertPressed: insertObstacle,
+    paths: shortestAndSafestPath,
+    dispatch,
+  } = useMaps();
 
   const { getBlockedEdge } = useBlockedEdge();
 
@@ -23,15 +27,15 @@ const MapComponent = ({ mapImageVal }) => {
   const [obstacles, setObstacles] = useState([]);
   const [hasObstacle, setHasObstacle] = useState(false);
   const [blockedEdges, setBlockedEdges] = useState([]);
-  const [shortestAndSafestPath, setShortestAndSafestPath] = useState([
-    // "A",
-    // "E",
-    // "I",
-    // "J",
-    // "K",
-    // "O",
-    // "T",
-  ]);
+  // const [shortestAndSafestPath, setShortestAndSafestPath] = useState([
+  //   // "A",
+  //   // "E",
+  //   // "I",
+  //   // "J",
+  //   // "K",
+  //   // "O",
+  //   // "T",
+  // ]);
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
 
@@ -198,7 +202,7 @@ const MapComponent = ({ mapImageVal }) => {
           color={hasObstacle ? "red" : "orange"}
         />
       )}
-      {/* <DrawPath /> */}
+      <DrawPath />
     </>
   );
 

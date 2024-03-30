@@ -63,6 +63,9 @@ function reducer(state, action) {
       };
     }
 
+    case "path/loaded":
+      return { ...state, paths: action.payload };
+
     case "feature/selected":
       return {
         ...state,

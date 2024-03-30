@@ -1,20 +1,23 @@
 import axios from "axios";
 
-export async function getShortestPath(startNode, targetNode, graph) {
+export async function getShortestPath(startNode, targetNode, graph, dispatch) {
+  console.log("startNode: ", startNode);
+  console.log("targetNode: ", targetNode);
+  console.log("graph: ", graph);
+
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `http://localhost:5000/api/get/shortest/path`,
       {
-        data: {
-          startNode,
-          targetNode,
-          graph,
-        },
+        startNode,
+        targetNode,
+        graph,
       },
     );
 
     if (response.data.message === "Success") {
-      return response.data.data;
+      dispatch({ type: "path/loaded", payload: response.data.data.path });
+      console.log(response.data.data);
     } else {
       throw new Error(response.data.message);
     }
