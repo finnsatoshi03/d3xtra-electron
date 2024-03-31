@@ -2,9 +2,10 @@ import { useRef } from "react";
 import { useMaps } from "../contexts/MapContext";
 
 import addIcon from "../../../../resources/icons/light-add.png";
+import changeIcon from "../../../../resources/icons/light-change.png";
 
 function ImportMap() {
-  const { dispatch } = useMaps();
+  const { dispatch, base64map } = useMaps();
   const fileInputRef = useRef();
 
   const handleImageClick = () => {
@@ -40,11 +41,13 @@ function ImportMap() {
           hidden
         />
         <img
-          src={addIcon}
+          src={base64map ? changeIcon : addIcon}
           className="my-2 size-8 rounded-full bg-[#005cc8] p-2 hover:cursor-pointer"
           onClick={handleImageClick}
         />
-        <h1 className="text-[14px]">Import Your Map</h1>
+        <h1 className="text-[14px]">
+          {base64map ? "Change Your Map" : "Import Your Map"}
+        </h1>
         <p className="w-3/4 text-center text-[10px] font-normal leading-3">
           Upload a <span className="font-bold text-[#005cc8]">custom map</span>{" "}
           with your obstacles

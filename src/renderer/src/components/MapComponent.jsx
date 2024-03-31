@@ -21,6 +21,7 @@ const MapComponent = ({ mapImageVal }) => {
     mapImage,
     dispatch,
     obstacles,
+    blockedEdges,
   } = useMaps();
 
   // console.log(base64map);
@@ -31,7 +32,7 @@ const MapComponent = ({ mapImageVal }) => {
   const [showHighlightPlane, setShowHighlightPlane] = useState(false);
   // const [obstacles, setObstacles] = useState([]);
   const [hasObstacle, setHasObstacle] = useState(false);
-  const [blockedEdges, setBlockedEdges] = useState([]);
+  // const [blockedEdges, setBlockedEdges] = useState([]);
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
 
@@ -115,12 +116,12 @@ const MapComponent = ({ mapImageVal }) => {
       });
 
       if (!blockedEdges.includes(newBlockedEdge)) {
-        dispatch({ type: "add/obstacle", payload: obstaclePosition });
-        // setObstacles([...obstacles, obstaclePosition]);
-        setBlockedEdges([...blockedEdges, newBlockedEdge]);
+        dispatch({ type: "obstacle/add", payload: obstaclePosition });
+        // dispatch({ type: "blockedEdges/add", payload: newBlockedEdge });
+        // setBlockedEdges([...blockedEdges, newBlockedEdge]);
 
         dispatch({
-          type: "insert/obstacle",
+          type: "obstacle/insert",
           payload: {
             obstaclePosition,
             blockedEdgeIndex: newBlockedEdge,

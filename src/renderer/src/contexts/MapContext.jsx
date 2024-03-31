@@ -14,6 +14,7 @@ const MapContext = createContext();
 
 const initialState = {
   graph: {},
+  initialGraph: {},
   paths: [],
   obstacles: [],
   blockedEdges: [],
@@ -38,6 +39,7 @@ function reducer(state, action) {
         ...state,
         isLoading: false,
         graph: action.payload.graph,
+        initialGraph: JSON.parse(JSON.stringify(action.payload.graph)),
         blockedEdges: action.payload.blockedEdges,
         message: action.payload.message,
       };
@@ -51,7 +53,7 @@ function reducer(state, action) {
     case "insert/released":
       return { ...state, isInsertPressed: false };
 
-    case "insert/obstacle": {
+    case "obstacle/insert": {
       const { obstaclePosition, blockedEdgeIndex } = action.payload;
       const updatedGraph = { ...state.graph };
       const updatedBlockedEdges = [...state.blockedEdges, blockedEdgeIndex];
@@ -72,7 +74,7 @@ function reducer(state, action) {
       };
     }
 
-    case "add/obstacle":
+    case "obstacle/add":
       return { ...state, obstacles: [...state.obstacles, action.payload] };
 
     case "path/loaded":
@@ -105,7 +107,8 @@ function reducer(state, action) {
     case "reset":
       return {
         ...initialState,
-        graph: state.graph,
+        graph: JSON.parse(JSON.stringify(state.initialGraph)),
+        initialGraph: JSON.parse(JSON.stringify(state.initialGraph)),
         mapImage: state.mapImage,
         selectedFeature: state.selectedFeature,
       };

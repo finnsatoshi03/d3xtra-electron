@@ -15,10 +15,13 @@ const features = [
 ];
 
 function ExtraFeatures() {
-  const { selectedFeature, dispatch, obstacles } = useMaps();
+  const { selectedFeature, dispatch, graph } = useMaps();
   const isDynamicMap = selectedFeature === "Dynamic Map";
 
-  console.log(obstacles);
+  // console.log(obstacles);
+  // console.log(blockedEdges);
+  console.log("graph", graph);
+
   const handleSelectFeature = (feature) => {
     if (selectedFeature === feature) return;
 
