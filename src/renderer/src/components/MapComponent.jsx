@@ -20,6 +20,7 @@ const MapComponent = ({ mapImageVal }) => {
     base64map,
     mapImage,
     dispatch,
+    obstacles,
   } = useMaps();
 
   // console.log(base64map);
@@ -28,7 +29,7 @@ const MapComponent = ({ mapImageVal }) => {
 
   const [mousePosition, setMousePosition] = useState(null);
   const [showHighlightPlane, setShowHighlightPlane] = useState(false);
-  const [obstacles, setObstacles] = useState([]);
+  // const [obstacles, setObstacles] = useState([]);
   const [hasObstacle, setHasObstacle] = useState(false);
   const [blockedEdges, setBlockedEdges] = useState([]);
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
@@ -114,7 +115,8 @@ const MapComponent = ({ mapImageVal }) => {
       });
 
       if (!blockedEdges.includes(newBlockedEdge)) {
-        setObstacles([...obstacles, obstaclePosition]);
+        dispatch({ type: "add/obstacle", payload: obstaclePosition });
+        // setObstacles([...obstacles, obstaclePosition]);
         setBlockedEdges([...blockedEdges, newBlockedEdge]);
 
         dispatch({

@@ -15,13 +15,12 @@ const features = [
 ];
 
 function ExtraFeatures() {
-  const { selectedFeature, dispatch } = useMaps();
+  const { selectedFeature, dispatch, obstacles } = useMaps();
   const isDynamicMap = selectedFeature === "Dynamic Map";
 
+  console.log(obstacles);
   const handleSelectFeature = (feature) => {
-    if (selectedFeature === feature) {
-      return;
-    }
+    if (selectedFeature === feature) return;
 
     dispatch({ type: "feature/selected", payload: feature });
 
@@ -29,10 +28,7 @@ function ExtraFeatures() {
       feature !== "Interactive Map" ||
       (isDynamicMap && feature === "Interactive Map")
     ) {
-      dispatch({ type: "base64/encoded", payload: "" });
-      dispatch({ type: "path/reset" });
-      dispatch({ type: "currentLocation/updated", payload: "" });
-      dispatch({ type: "destination/updated", payload: "" });
+      dispatch({ type: "reset" });
     }
   };
 

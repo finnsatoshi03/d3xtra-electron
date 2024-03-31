@@ -12,6 +12,8 @@ function ImportMap() {
   };
 
   const handleFileChange = (event) => {
+    dispatch({ type: "reset" });
+
     const file = event.target.files[0];
     const reader = new FileReader();
 

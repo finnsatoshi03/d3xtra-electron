@@ -72,6 +72,9 @@ function reducer(state, action) {
       };
     }
 
+    case "add/obstacle":
+      return { ...state, obstacles: [...state.obstacles, action.payload] };
+
     case "path/loaded":
       return { ...state, paths: action.payload };
 
@@ -98,6 +101,14 @@ function reducer(state, action) {
 
     case "mapImage/updated":
       return { ...state, mapImage: action.payload };
+
+    case "reset":
+      return {
+        ...initialState,
+        graph: state.graph,
+        mapImage: state.mapImage,
+        selectedFeature: state.selectedFeature,
+      };
 
     default:
       return new Error("Unknown Action");
@@ -128,6 +139,7 @@ function MapProvider({ children }) {
 
   useEffect(
     function () {
+      console.log(currentLocation, destination);
       async function fetchMap() {
         dispatch({ type: "loading" });
         console.log(base64map ? "base64" : "nada");
