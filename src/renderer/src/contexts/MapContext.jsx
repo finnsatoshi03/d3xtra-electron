@@ -77,6 +77,9 @@ function reducer(state, action) {
     case "obstacle/add":
       return { ...state, obstacles: [...state.obstacles, action.payload] };
 
+    case "obstacle/remove":
+      return { ...state, obstacles: [], blockedEdges: [] };
+
     case "path/loaded":
       return { ...state, paths: action.payload };
 
@@ -105,13 +108,23 @@ function reducer(state, action) {
       return { ...state, mapImage: action.payload };
 
     case "reset":
-      return {
-        ...initialState,
-        graph: JSON.parse(JSON.stringify(state.initialGraph)),
-        initialGraph: JSON.parse(JSON.stringify(state.initialGraph)),
-        mapImage: state.mapImage,
-        selectedFeature: state.selectedFeature,
-      };
+      if (state.selectedFeature === "Dynamic Map") {
+        return {
+          ...state,
+          paths: [],
+          obstacles: [],
+          currentLocation: "",
+          destination: "",
+        };
+      } else {
+        return {
+          ...initialState,
+          graph: JSON.parse(JSON.stringify(state.initialGraph)),
+          initialGraph: JSON.parse(JSON.stringify(state.initialGraph)),
+          mapImage: state.mapImage,
+          selectedFeature: state.selectedFeature,
+        };
+      }
 
     default:
       return new Error("Unknown Action");
