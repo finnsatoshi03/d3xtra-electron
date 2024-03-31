@@ -8,10 +8,11 @@ function OtherRoutes() {
   const { otherPaths, paths, dispatch } = useMaps();
   const [selectedRoute, setSelectedRoute] = useState(0);
 
-  console.log(paths);
+  // console.log(paths);
 
   const transformedPaths = Array.isArray(otherPaths)
     ? otherPaths.map((path) => {
+        otherPaths?.sort((a, b) => a[1] - b[1]);
         const route = path[0].slice(1, -1).join(", "); // remove the first and last element, that's start and end nodes
         const distanceInKm = convertDistanceToKm(path[1]);
         const walkingTime = calculateWalkingTime(distanceInKm);
@@ -26,9 +27,9 @@ function OtherRoutes() {
       })
     : [];
 
-  if (Array.isArray(transformedPaths)) {
-    transformedPaths.sort((a, b) => a.value - b.value);
-  }
+  // if (Array.isArray(transformedPaths)) {
+  //   transformedPaths.sort((a, b) => a.value - b.value);
+  // }
 
   const handleRouteClick = (index) => {
     setSelectedRoute(index);
