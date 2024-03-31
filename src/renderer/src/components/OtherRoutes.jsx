@@ -1,26 +1,14 @@
+import { useState } from "react";
 import { useMaps } from "../contexts/MapContext";
 import { fontHeader } from "../layout/Infobar";
 import { calculateWalkingTime, convertDistanceToKm } from "../utils/helpers";
 import Route from "./Route";
 
 function OtherRoutes() {
-  const { otherPaths, distance } = useMaps();
+  const { otherPaths, paths, dispatch } = useMaps();
+  const [selectedRoute, setSelectedRoute] = useState(0);
 
-  // let otherPathsExcludingShortest;
-
-  // if (Array.isArray(otherPaths)) {
-  //   const indexOfShortest = otherPaths.reduce(
-  //     (lowestIndex, currentPath, currentIndex) => {
-  //       return currentPath[1] < otherPaths[lowestIndex][1]
-  //         ? currentIndex
-  //         : lowestIndex;
-  //     },
-  //     0,
-  //   );
-
-  //   otherPathsExcludingShortest = [...otherPaths];
-  //   otherPathsExcludingShortest.splice(indexOfShortest, 1);
-  // }
+  console.log(paths);
 
   const transformedPaths = Array.isArray(otherPaths)
     ? otherPaths.map((path) => {
@@ -42,8 +30,17 @@ function OtherRoutes() {
     transformedPaths.sort((a, b) => a.value - b.value);
   }
 
-  // console.log(otherPathsExcludingShortest);
-  // console.log(distance);
+  const handleRouteClick = (index) => {
+    setSelectedRoute(index);
+    // console.log(`Route ${index + 1} was clicked.`);
+    const paths = otherPaths[index][0];
+    const distance = otherPaths[index][1];
+    // console.log(distance, paths);
+    dispatch({
+      type: "path/update",
+      payload: { paths: paths, distance: distance },
+    });
+  };
 
   return (
     <div className="pt-6">
@@ -59,12 +56,13 @@ function OtherRoutes() {
             <Route
               key={index}
               index={index + 1}
-              highlight={index === 0}
+              highlight={index === selectedRoute}
               value={route.value}
               unit={route.unit}
               route={route.route}
               routeUnit={route.routeUnit}
               routeValue={route.routeValue}
+              onClick={() => handleRouteClick(index)}
             />
           ))
         )}

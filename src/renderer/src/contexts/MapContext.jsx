@@ -90,6 +90,13 @@ function reducer(state, action) {
         otherPaths: action.payload.otherPaths,
       };
 
+    case "path/update":
+      return {
+        ...state,
+        paths: action.payload.paths,
+        distance: action.payload.distance,
+      };
+
     case "path/reset":
       return { ...state, paths: [] };
 
