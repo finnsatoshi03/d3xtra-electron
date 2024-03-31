@@ -13,8 +13,8 @@ const BASE_URL = "http://localhost:5000/api/get/";
 const MapContext = createContext();
 
 const initialState = {
-  graph: {},
-  initialGraph: {},
+  graph: {}, // for storing the graph
+  initialGraph: {}, // for resetting the graph
   paths: [],
   obstacles: [],
   blockedEdges: [],
