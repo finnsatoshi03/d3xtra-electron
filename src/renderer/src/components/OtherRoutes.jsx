@@ -1,5 +1,4 @@
 import { useMaps } from "../contexts/MapContext";
-import { routeTempData } from "../data/tempData";
 import { fontHeader } from "../layout/Infobar";
 import { calculateWalkingTime, convertDistanceToKm } from "../utils/helpers";
 import Route from "./Route";
