@@ -17,6 +17,7 @@ const initialState = {
   initialGraph: {}, // for resetting the graph
   paths: [],
   distance: 0,
+  otherPaths: {},
   obstacles: [],
   blockedEdges: [],
   message: "",
@@ -86,6 +87,7 @@ function reducer(state, action) {
         ...state,
         paths: action.payload.paths,
         distance: action.payload.distance,
+        otherPaths: action.payload.otherPaths,
       };
 
     case "path/reset":
@@ -141,6 +143,7 @@ function MapProvider({ children }) {
     {
       graph,
       paths,
+      otherPaths,
       message,
       error,
       isLoading,
@@ -206,6 +209,7 @@ function MapProvider({ children }) {
     () => ({
       graph,
       paths,
+      otherPaths,
       blockedEdges,
       obstacles,
       message,
@@ -223,6 +227,7 @@ function MapProvider({ children }) {
     [
       graph,
       paths,
+      otherPaths,
       blockedEdges,
       obstacles,
       message,

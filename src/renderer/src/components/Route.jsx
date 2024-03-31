@@ -6,9 +6,12 @@ function Route({
   route = "Kabilang Daan",
   routeValue = "7.8",
   routeUnit = "km.",
+  highlight = false,
 }) {
   return (
-    <div className="mt-3 flex items-center gap-3 xl:mt-5 xl:gap-5">
+    <div
+      className={`my-1.5 flex items-center gap-3 rounded-lg px-2 py-1.5 xl:my-2.5 xl:gap-5 xl:px-3 xl:py-2.5 ${highlight ? "bg-blue200" : ""}`}
+    >
       <div className="flex size-8 items-center justify-center rounded-full bg-gray200 xl:size-9">
         <p className="text-sm font-bold xl:text-base">{index}</p>
       </div>
@@ -18,7 +21,9 @@ function Route({
           <span className="text-xs font-normal italic">via </span>
           <span className="text-xs font-semibold">{route}</span>
         </p>
-        <p className="text-xs font-medium leading-[0.5rem] text-gray200">
+        <p
+          className={`text-xs font-medium leading-[0.5rem]  ${highlight ? "text-gray-500" : "text-gray200"}`}
+        >
           {routeValue} {routeUnit}
         </p>
       </div>

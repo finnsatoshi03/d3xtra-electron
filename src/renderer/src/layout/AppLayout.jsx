@@ -46,7 +46,7 @@ function AppLayout() {
       <Modal.Window name="errorModal">
         <div className="-mt-8 flex w-[200px] flex-col text-center text-black xl:w-[400px]">
           <Lottie options={defaultOptions} height={150} width={150} />
-          <div className="-mt-8">{error}</div>
+          <div className="-mt-8 leading-4">{error}</div>
         </div>
       </Modal.Window>
     </div>

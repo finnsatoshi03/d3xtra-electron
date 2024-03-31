@@ -1,10 +1,6 @@
 import axios from "axios";
 
 export async function getShortestPath(startNode, targetNode, graph, dispatch) {
-  // console.log("startNode: ", startNode);
-  // console.log("targetNode: ", targetNode);
-  // console.log("graph: ", graph);
-
   try {
     const response = await axios.post(
       `http://localhost:5000/api/get/shortest/path`,
@@ -21,6 +17,7 @@ export async function getShortestPath(startNode, targetNode, graph, dispatch) {
         payload: {
           paths: response.data.data.path,
           distance: response.data.data.safestAndShortestPathDistance,
+          otherPaths: response.data.data.otherPathWithDistances,
         },
       });
       // console.log(response.data.data);

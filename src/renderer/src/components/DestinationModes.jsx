@@ -1,18 +1,23 @@
 import Mode from "../components/Mode";
 
+import { useMaps } from "../contexts/MapContext";
+import {
+  calculateMotorcyclingTime,
+  calculateWalkingTime,
+  convertDistanceToKm,
+} from "../utils/helpers";
+
 import locationIcon from "../../../../resources/icons/pin_location.png";
 import motorIcon from "../../../../resources/icons/motorcycle.png";
 import walkingIcon from "../../../../resources/icons/walking.png";
-import { useMaps } from "../contexts/MapContext";
 
 function DestinationModes() {
   const { distance: distanceInCm } = useMaps();
 
-  // scaling factor to represent the distance in a way that looks like km
-  const distanceInKm = (distanceInCm / 100).toFixed(2);
+  const distanceInKm = convertDistanceToKm(distanceInCm);
 
-  const walkingTime = ((distanceInKm / 5) * 60).toFixed(0); // 5 km/h
-  const motorcyclingTime = ((distanceInKm / 60) * 60).toFixed(0); // 60 km/h
+  const walkingTime = calculateWalkingTime(distanceInKm); // 5 km/h
+  const motorcyclingTime = calculateMotorcyclingTime(distanceInKm); // 60 km/h
 
   const modes = [
     { icon: walkingIcon, value: walkingTime, unit: "mins." },
