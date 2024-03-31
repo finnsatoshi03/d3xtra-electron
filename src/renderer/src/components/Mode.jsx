@@ -2,6 +2,8 @@
 import walkingIcon from "../../../../resources/icons/walking.png";
 
 function Mode({ value = 1.45, unit = "min", icon = walkingIcon }) {
+  // console.log(value);
+
   return (
     <div className="flex flex-col">
       <img src={icon} className="size-[20px] xl:size-[25px]" />

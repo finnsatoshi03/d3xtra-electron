@@ -16,6 +16,7 @@ const initialState = {
   graph: {}, // for storing the graph
   initialGraph: {}, // for resetting the graph
   paths: [],
+  distance: 0,
   obstacles: [],
   blockedEdges: [],
   message: "",
@@ -81,7 +82,11 @@ function reducer(state, action) {
       return { ...state, obstacles: [], blockedEdges: [] };
 
     case "path/loaded":
-      return { ...state, paths: action.payload };
+      return {
+        ...state,
+        paths: action.payload.paths,
+        distance: action.payload.distance,
+      };
 
     case "path/reset":
       return { ...state, paths: [] };
@@ -147,11 +152,13 @@ function MapProvider({ children }) {
       selectedFeature,
       currentLocation,
       destination,
+      distance,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
   // console.log("graph", graph);
   // console.log("blockedEdges", blockedEdges);
+  // console.log(distance);
 
   useEffect(
     function () {
@@ -211,6 +218,7 @@ function MapProvider({ children }) {
       dispatch,
       currentLocation,
       destination,
+      distance,
     }),
     [
       graph,
@@ -226,6 +234,7 @@ function MapProvider({ children }) {
       mapImage,
       currentLocation,
       destination,
+      distance,
     ],
   );
 

@@ -1,12 +1,3 @@
-import locationIcon from "../../../../resources/icons/pin_location.png";
-import motorIcon from "../../../../resources/icons/motorcycle.png";
-
-export const tempData = [
-  {},
-  { icon: motorIcon, value: 30, unit: "mins." },
-  { icon: locationIcon, value: 7.5, unit: "km." },
-];
-
 export const routeTempData = [
   {},
   {
