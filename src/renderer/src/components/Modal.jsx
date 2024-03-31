@@ -35,7 +35,7 @@ function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
   const modalRef = useOutsideClick(close);
 
-  if (name !== openName) return null;
+  if (name !== openName) return;
 
   const bgClass =
     name === "errorModal"
@@ -60,6 +60,7 @@ function Window({ children, name }) {
     document.body,
   );
 }
+
 Modal.Open = Open;
 Modal.Window = Window;
 
