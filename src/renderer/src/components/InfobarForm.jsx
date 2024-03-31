@@ -31,6 +31,20 @@ function InfobarForm({ handleSubmit }) {
     }
   };
 
+  const handleSubmitWithValidation = (
+    e,
+    currentLocation,
+    destination,
+    graph,
+  ) => {
+    if (!currentLocation || !destination) {
+      validateInput("currentLocation");
+      validateInput("destination");
+      return;
+    }
+    handleSubmit(e, currentLocation, destination, graph);
+  };
+
   return (
     <form
       className={`my-6`}
@@ -52,8 +66,12 @@ function InfobarForm({ handleSubmit }) {
           }
           options={currentLocationNodes}
           handleSubmit={() => {
-            validateInput("currentLocation");
-            handleSubmit(null, currentLocation, destination, graph);
+            handleSubmitWithValidation(
+              null,
+              currentLocation,
+              destination,
+              graph,
+            );
           }}
           error={currentLocationError}
         />
@@ -81,8 +99,12 @@ function InfobarForm({ handleSubmit }) {
           }
           options={destinationNodes}
           handleSubmit={() => {
-            validateInput("destination");
-            handleSubmit(null, currentLocation, destination, graph);
+            handleSubmitWithValidation(
+              null,
+              currentLocation,
+              destination,
+              graph,
+            );
           }}
           error={destinationError}
         />

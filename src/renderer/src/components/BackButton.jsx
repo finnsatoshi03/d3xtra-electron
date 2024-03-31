@@ -3,7 +3,7 @@ import { useMaps } from "../contexts/MapContext";
 
 function BackButton() {
   const { dispatch, blockedEdges, paths, selectedFeature } = useMaps();
-  console.log(paths);
+  // console.log(paths);
 
   function handleReset() {
     dispatch({ type: "reset" });

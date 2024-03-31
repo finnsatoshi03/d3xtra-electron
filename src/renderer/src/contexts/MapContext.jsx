@@ -155,7 +155,7 @@ function MapProvider({ children }) {
 
   useEffect(
     function () {
-      console.log(currentLocation, destination);
+      // console.log(currentLocation, destination);
       async function fetchMap() {
         dispatch({ type: "loading" });
         console.log(base64map ? "base64" : "nada");
