@@ -14,6 +14,10 @@ import { pathCoordinates, nodeCoordinates } from "../data/coordinates";
 import { useBlockedEdge } from "../hooks/useBlockedEdge";
 import { useMaps } from "../contexts/MapContext";
 
+import pinModelPath from "../../../../resources/map_pin.glb";
+import endPinPath from "../../../../resources/end_pin.glb";
+import obstacleModelPath from "../../../../resources/obstacle.glb";
+
 const MapComponent = ({ gltfPath }) => {
   const {
     isInsertPressed: insertObstacle,
@@ -23,6 +27,8 @@ const MapComponent = ({ gltfPath }) => {
     dispatch,
     obstacles,
     blockedEdges,
+    currentLocation,
+    destination,
   } = useMaps();
 
   const { getBlockedEdge } = useBlockedEdge();
@@ -32,7 +38,9 @@ const MapComponent = ({ gltfPath }) => {
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
 
-  console.log("mapComponent Renders");
+  // console.log("mapComponent Renders");
+  // console.log(currentLocation);
+  // console.log(destination);
 
   useEffect(() => {
     if (base64map) {
@@ -190,13 +198,13 @@ const MapComponent = ({ gltfPath }) => {
   );
 
   const ObstacleGeo = ({ position }) => {
+    const { scene } = useGLTF(obstacleModelPath);
+    const model = useMemo(() => scene.clone(), [scene]);
+
     return (
-      <group>
-        <mesh rotation-x={-Math.PI / 2} position={position} castShadow={true}>
-          <boxGeometry args={[0.9, 0.9, 1]} />
-          <meshStandardMaterial color="darkblue" />
-        </mesh>
-      </group>
+      <mesh position={position} castShadow={true}>
+        <primitive object={model} scale={[0.9, 1, 0.9]} />
+      </mesh>
     );
   };
 
@@ -217,6 +225,18 @@ const MapComponent = ({ gltfPath }) => {
           shortestAndSafestPath={shortestAndSafestPath}
           currentPathIndex={currentPathIndex}
           setCurrentPathIndex={setCurrentPathIndex}
+        />
+      )}
+      {currentLocation && (
+        <LocationPin
+          position={nodeCoordinates[currentLocation]}
+          modelPath={pinModelPath}
+        />
+      )}
+      {destination && (
+        <LocationPin
+          position={nodeCoordinates[destination]}
+          modelPath={endPinPath}
         />
       )}
     </>
@@ -263,6 +283,16 @@ const DrawPath = ({
   return coordinatesOfPath.length >= 2 ? (
     <Line points={coordinatesOfPath} lineWidth={5} color={"#0f53ff"} />
   ) : null;
+};
+
+const LocationPin = ({ position, modelPath }) => {
+  const { scene } = useGLTF(modelPath);
+
+  return (
+    <mesh position={position}>
+      <primitive object={scene} />
+    </mesh>
+  );
 };
 
 export default MapComponent;
