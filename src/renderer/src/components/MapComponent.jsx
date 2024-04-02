@@ -7,13 +7,14 @@ import {
   Grid,
   Line,
   PerspectiveCamera,
+  useGLTF,
 } from "@react-three/drei";
 import { DoubleSide, TextureLoader, Vector3 } from "three";
 import { pathCoordinates, nodeCoordinates } from "../data/coordinates";
 import { useBlockedEdge } from "../hooks/useBlockedEdge";
 import { useMaps } from "../contexts/MapContext";
 
-const MapComponent = ({ mapImageVal }) => {
+const MapComponent = ({ gltfPath }) => {
   const {
     isInsertPressed: insertObstacle,
     paths: shortestAndSafestPath,
@@ -24,15 +25,10 @@ const MapComponent = ({ mapImageVal }) => {
     blockedEdges,
   } = useMaps();
 
-  // console.log(base64map);
-
   const { getBlockedEdge } = useBlockedEdge();
-
   const [mousePosition, setMousePosition] = useState(null);
   const [showHighlightPlane, setShowHighlightPlane] = useState(false);
-  // const [obstacles, setObstacles] = useState([]);
   const [hasObstacle, setHasObstacle] = useState(false);
-  // const [blockedEdges, setBlockedEdges] = useState([]);
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
 
@@ -43,9 +39,9 @@ const MapComponent = ({ mapImageVal }) => {
         payload: "data:image/png;base64," + base64map,
       });
     } else {
-      dispatch({ type: "mapImage/updated", payload: mapImageVal });
+      dispatch({ type: "mapImage/updated", payload: "" });
     }
-  }, [base64map, mapImageVal, dispatch]);
+  }, [base64map, dispatch]); //mapImageVal
 
   useEffect(() => {
     setCurrentPathIndex(0);
@@ -133,38 +129,54 @@ const MapComponent = ({ mapImageVal }) => {
     }
   }
 
-  const Plane = ({ mapVal }) => {
-    const dextraMap = useLoader(TextureLoader, mapImage);
+  const Plane = () => {
+    const { scene } = useGLTF(gltfPath);
+    const texture = mapImage && useLoader(TextureLoader, mapImage);
 
     return (
-      <group>
-        <mesh
-          rotation-x={-Math.PI / 2}
-          onPointerMove={
-            insertObstacle && shortestAndSafestPath.length === 0
-              ? handleOnPointerMove
-              : undefined
-          }
-          onClick={
-            insertObstacle && shortestAndSafestPath.length === 0
-              ? handleOnClick
-              : undefined
-          }
-          position={[0, -0.01, 0]}
-          userData={{ name: "ground" }}
-        >
-          <planeGeometry args={[20.4, 20.4]} />
-          <meshBasicMaterial map={dextraMap} side={DoubleSide} />
-        </mesh>
-        {insertObstacle && shortestAndSafestPath.length === 0 && (
-          <Grid
-            args={[20, 20]}
-            cellColor={"white"}
-            sectionThickness={0}
-            cellThickness={1}
-          />
+      <>
+        {mapImage ? (
+          <group>
+            <mesh
+              rotation-x={-Math.PI / 2}
+              position={[0, -0.05, 0]}
+              userData={{ name: "ground" }}
+            >
+              <planeGeometry args={[20.4, 20.4]} />
+              <meshBasicMaterial map={texture} side={DoubleSide} />
+            </mesh>
+          </group>
+        ) : (
+          <group>
+            <mesh
+              castShadow={true}
+              receiveShadow={true}
+              onPointerMove={
+                insertObstacle && shortestAndSafestPath.length === 0
+                  ? handleOnPointerMove
+                  : undefined
+              }
+              onClick={
+                insertObstacle && shortestAndSafestPath.length === 0
+                  ? handleOnClick
+                  : undefined
+              }
+              position={[0, -0.05, 0]}
+              userData={{ name: "ground" }}
+            >
+              <primitive object={scene} scale={4.08} />
+            </mesh>
+            {insertObstacle && shortestAndSafestPath.length === 0 && (
+              <Grid
+                args={[20, 20]}
+                cellColor={"white"}
+                sectionThickness={0}
+                cellThickness={1}
+              />
+            )}
+          </group>
         )}
-      </group>
+      </>
     );
   };
 
@@ -196,6 +208,7 @@ const MapComponent = ({ mapImageVal }) => {
 
     useFrame(() => {
       setFrameCount(frameCount + 1);
+      console.log("setters");
 
       if (
         frameCount % 5 === 0 &&
@@ -229,9 +242,10 @@ const MapComponent = ({ mapImageVal }) => {
 
   return (
     <Canvas shadows={true}>
-      <directionalLight position={[-7.6, 10.4, 20]} intensity={50} />
+      <directionalLight position={[-7.6, 10.4, 20]} intensity={5} />
+      <ambientLight intensity={0.5} />
       <PerspectiveCamera makeDefault position={[4, 15, 25]} />
-      <Scene mapVal={mapImageVal} />
+      <Scene />
       <CameraControls />
     </Canvas>
   );
