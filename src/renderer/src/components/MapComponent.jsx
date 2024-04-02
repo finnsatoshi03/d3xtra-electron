@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import {
   CameraControls,
@@ -31,6 +31,8 @@ const MapComponent = ({ gltfPath }) => {
   const [hasObstacle, setHasObstacle] = useState(false);
   const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [frameCount, setFrameCount] = useState(0);
+
+  console.log("mapComponent Renders");
 
   useEffect(() => {
     if (base64map) {
@@ -198,32 +200,6 @@ const MapComponent = ({ gltfPath }) => {
     );
   };
 
-  const DrawPath = React.memo(() => {
-    const coordinatesOfPath = React.useMemo(() => {
-      return shortestAndSafestPath.slice(0, currentPathIndex).map((node) => {
-        const [x, y, z] = nodeCoordinates[node];
-        return new Vector3(x, y - 0.2, z);
-      });
-    }, [shortestAndSafestPath, currentPathIndex]);
-
-    useFrame(() => {
-      setFrameCount(frameCount + 1);
-      console.log("setters");
-
-      if (
-        frameCount % 5 === 0 &&
-        currentPathIndex < shortestAndSafestPath.length
-      ) {
-        setCurrentPathIndex(currentPathIndex + 1);
-      }
-    });
-
-    return coordinatesOfPath.length >= 2 ? (
-      <Line points={coordinatesOfPath} lineWidth={5} color={"#0f53ff"} />
-    ) : null;
-    // console.log("No path to draw")
-  });
-
   const Scene = ({ mapVal }) => (
     <>
       <Plane mapVal={mapVal} />
@@ -236,7 +212,13 @@ const MapComponent = ({ gltfPath }) => {
           color={hasObstacle ? "red" : "orange"}
         />
       )}
-      {shortestAndSafestPath.length > 0 && <DrawPath />}
+      {shortestAndSafestPath.length > 0 && (
+        <DrawPath
+          shortestAndSafestPath={shortestAndSafestPath}
+          currentPathIndex={currentPathIndex}
+          setCurrentPathIndex={setCurrentPathIndex}
+        />
+      )}
     </>
   );
 
@@ -249,6 +231,38 @@ const MapComponent = ({ gltfPath }) => {
       <CameraControls />
     </Canvas>
   );
+};
+
+const DrawPath = ({
+  shortestAndSafestPath,
+  currentPathIndex,
+  setCurrentPathIndex,
+}) => {
+  const coordinatesOfPath = useMemo(() => {
+    return shortestAndSafestPath.slice(0, currentPathIndex).map((node) => {
+      const [x, y, z] = nodeCoordinates[node];
+      return new Vector3(x, y - 0.2, z);
+    });
+  }, [shortestAndSafestPath, currentPathIndex]);
+
+  const frameCount = useRef(0);
+
+  console.log("drawPath Renders");
+
+  useFrame(() => {
+    frameCount.current += 1;
+
+    if (
+      frameCount.current % 5 === 0 &&
+      currentPathIndex < shortestAndSafestPath.length
+    ) {
+      setCurrentPathIndex(currentPathIndex + 1);
+    }
+  });
+
+  return coordinatesOfPath.length >= 2 ? (
+    <Line points={coordinatesOfPath} lineWidth={5} color={"#0f53ff"} />
+  ) : null;
 };
 
 export default MapComponent;
