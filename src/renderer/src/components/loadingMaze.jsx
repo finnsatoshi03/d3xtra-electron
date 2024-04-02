@@ -5,11 +5,11 @@ function Loading() {
 
   useEffect(() => {
     const texts = [
-      "Loading...",
-      "Plotting Vertices",
-      "Tracing available paths",
-      "Finding obstacles",
-      "Determining best path",
+      "Loading Map...",
+      "Generating Terrain...",
+      "Rendering Textures...",
+      "Placing Obstacles...",
+      "Finalizing Map Details...",
     ];
 
     let currentIndex = 0;
