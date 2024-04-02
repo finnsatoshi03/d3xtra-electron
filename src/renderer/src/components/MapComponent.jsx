@@ -7,13 +7,15 @@ import {
   Grid,
   Line,
   PerspectiveCamera,
+  useGLTF,
 } from "@react-three/drei";
 import { DoubleSide, TextureLoader, Vector3 } from "three";
 import { pathCoordinates, nodeCoordinates } from "../data/coordinates";
 import { useBlockedEdge } from "../hooks/useBlockedEdge";
 import { useMaps } from "../contexts/MapContext";
 
-const MapComponent = ({ mapImageVal }) => {
+const MapComponent = ({ gltfPath }) => {
+  const { nodes, materials } = useGLTF(gltfPath);
   const {
     isInsertPressed: insertObstacle,
     paths: shortestAndSafestPath,
@@ -43,9 +45,9 @@ const MapComponent = ({ mapImageVal }) => {
         payload: "data:image/png;base64," + base64map,
       });
     } else {
-      dispatch({ type: "mapImage/updated", payload: mapImageVal });
+      // dispatch({ type: "mapImage/updated", payload: mapImageVal });
     }
-  }, [base64map, mapImageVal, dispatch]);
+  }, [base64map, dispatch]); //mapImageVal
 
   useEffect(() => {
     setCurrentPathIndex(0);
@@ -133,38 +135,23 @@ const MapComponent = ({ mapImageVal }) => {
     }
   }
 
-  const Plane = ({ mapVal }) => {
-    const dextraMap = useLoader(TextureLoader, mapImage);
+  const Plane = () => {
+    const { scene } = useGLTF(gltfPath);
 
     return (
-      <group>
-        <mesh
-          rotation-x={-Math.PI / 2}
-          onPointerMove={
-            insertObstacle && shortestAndSafestPath.length === 0
-              ? handleOnPointerMove
-              : undefined
-          }
-          onClick={
-            insertObstacle && shortestAndSafestPath.length === 0
-              ? handleOnClick
-              : undefined
-          }
-          position={[0, -0.01, 0]}
-          userData={{ name: "ground" }}
-        >
-          <planeGeometry args={[20.4, 20.4]} />
-          <meshBasicMaterial map={dextraMap} side={DoubleSide} />
-        </mesh>
-        {insertObstacle && shortestAndSafestPath.length === 0 && (
-          <Grid
-            args={[20, 20]}
-            cellColor={"white"}
-            sectionThickness={0}
-            cellThickness={1}
-          />
-        )}
-      </group>
+      <primitive
+        object={scene}
+        onPointerMove={
+          insertObstacle && shortestAndSafestPath.length === 0
+            ? handleOnPointerMove
+            : undefined
+        }
+        onClick={
+          insertObstacle && shortestAndSafestPath.length === 0
+            ? handleOnClick
+            : undefined
+        }
+      />
     );
   };
 
@@ -231,7 +218,7 @@ const MapComponent = ({ mapImageVal }) => {
     <Canvas shadows={true}>
       <directionalLight position={[-7.6, 10.4, 20]} intensity={50} />
       <PerspectiveCamera makeDefault position={[4, 15, 25]} />
-      <Scene mapVal={mapImageVal} />
+      <Scene mapVal={nodes} />
       <CameraControls />
     </Canvas>
   );

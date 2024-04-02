@@ -16,6 +16,6 @@ export default defineConfig({
       },
     },
     plugins: [react()],
-    assetsInclude: ["**/*.glb"],
+    assetsInclude: ["**/*.glb", "**/*.gltf"],
   },
 });
