@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { DoubleSide, TextureLoader } from "three";
-import { Grid, useGLTF } from "@react-three/drei";
+import { Grid, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 
 function MapPlane({
@@ -18,6 +18,7 @@ function MapPlane({
     <>
       {mapImage ? (
         <group>
+          <PerspectiveCamera makeDefault position={[4, 15, 25]} />
           <mesh
             rotation-x={-Math.PI / 2}
             position={[0, -0.05, 0]}
@@ -29,6 +30,7 @@ function MapPlane({
         </group>
       ) : (
         <group>
+          <PerspectiveCamera makeDefault position={[-5, 10, 6]} />
           <mesh
             castShadow={true}
             receiveShadow={true}
