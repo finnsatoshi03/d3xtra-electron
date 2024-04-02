@@ -29,14 +29,21 @@ function DestinationModes() {
 
   return (
     <div className="my-8 flex items-center justify-center gap-2 xl:my-12 xl:gap-6">
-      {modes.map((mode, index) => (
-        <Mode
-          key={index}
-          icon={mode.icon}
-          value={mode.value}
-          unit={mode.unit}
-        />
-      ))}
+      {!distanceInCm ? (
+        <p className="text-xs text-gray200">
+          <strong>Select a destination</strong> to see estimated travel times by
+          walking and motorcycle.
+        </p>
+      ) : (
+        modes.map((mode, index) => (
+          <Mode
+            key={index}
+            icon={mode.icon}
+            value={mode.value}
+            unit={mode.unit}
+          />
+        ))
+      )}
     </div>
   );
 }
