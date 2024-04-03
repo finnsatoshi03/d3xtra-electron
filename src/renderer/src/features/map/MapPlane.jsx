@@ -2,6 +2,7 @@
 import { DoubleSide, TextureLoader } from "three";
 import { Grid, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
+import NodesIdentity from "./NodesIdentity";
 
 function MapPlane({
   gltfPath,
@@ -34,6 +35,7 @@ function MapPlane({
             <planeGeometry args={[20.4, 20.4]} />
             <meshBasicMaterial map={texture} side={DoubleSide} />
           </mesh>
+          <NodesIdentity />
         </group>
       ) : (
         <group>
@@ -62,6 +64,7 @@ function MapPlane({
               cellThickness={1}
             />
           )}
+          <NodesIdentity />
         </group>
       )}
     </>
