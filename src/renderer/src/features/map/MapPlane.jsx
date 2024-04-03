@@ -14,6 +14,13 @@ function MapPlane({
   const { scene } = useGLTF(gltfPath);
   const texture = mapImage && useLoader(TextureLoader, mapImage);
 
+  scene.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
   return (
     <>
       {mapImage ? (
@@ -32,8 +39,6 @@ function MapPlane({
         <group>
           <PerspectiveCamera makeDefault position={[-5, 10, 6]} />
           <mesh
-            castShadow={true}
-            receiveShadow={true}
             onPointerMove={
               insertObstacle && shortestAndSafestPath.length === 0
                 ? handleOnPointerMove
