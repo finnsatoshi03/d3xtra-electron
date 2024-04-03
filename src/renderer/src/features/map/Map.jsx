@@ -17,9 +17,9 @@ function Exposure() {
 
 function Map() {
   return (
-    <Canvas shadows={true}>
-      <directionalLight position={[-7.6, 10.4, 20]} intensity={5} />
-      <ambientLight intensity={0.5} />
+    <Canvas shadows>
+      <directionalLight position={[-5, 4.5, 9]} intensity={10} castShadow />
+      <ambientLight intensity={1} />
       <Scene />
       <Exposure />
       <CameraControls />
