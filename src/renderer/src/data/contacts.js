@@ -1,9 +1,9 @@
 import redcross from "../../../../resources/icons/redcross.png";
 import pnp from "../../../../resources/icons/pnp.png";
 import bfp from "../../../../resources/icons/bfp.png";
-import bantayBata from "../../../../resources/icons/bantayBata.png";
-import ltfrb from "../../../../resources/icons/ltfrb.png";
-import com from "../../../../resources/icons/com.png";
+import hospital from "../../../../resources/icons/hospital.png";
+import pdrrmc from "../../../../resources/icons/pdrrmc.png";
+import dpwh from "../../../../resources/icons/dpwh.png";
 
 export const contacts = [
   {
@@ -31,27 +31,27 @@ export const contacts = [
     icon: bfp,
   },
   {
-    organization: "Bantay Bata",
-    number: "163",
+    organization: "Camarines Norte Provincial Hospital",
+    number: "(054) 721 5425",
     image:
-      "https://springboard-foundation.org/wp-content/uploads/2008/03/BANTAY-BATA-1200x661.jpg",
-    specialties: "Child welfare / Abuse prevention",
-    icon: bantayBata,
+      "https://camnortenews.com/wp-content/uploads/2022/01/Untitled-design-6-4.png",
+    specialties: "Medical assistance / Health care",
+    icon: hospital,
   },
   {
-    organization: "LTFRB",
-    number: "1342",
+    organization: "PDRRMO",
+    number: "0998 561 5388",
     image:
-      "https://images.summitmedia-digital.com/esquiremagph/images/2020/02/24/Metro-Manila-Accident-Recording-Analysis-System-MAIN-IMAGE.jpg",
-    specialties: "Public transportation",
-    icon: ltfrb,
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlK160hc1TqBOF6Ra-a2EHzci_c8w6TgO5B8HmxIQ1jg&s",
+    specialties: "Disaster response / Emergency management",
+    icon: pdrrmc,
   },
   {
-    organization: "Commission on Human Rights",
-    number: "1343",
+    organization: "Camarines Norte DPWH",
+    number: "(054) 440 3108",
     image:
-      "https://www.ecojesuit.com/wp-content/uploads/2018/09/P_20180830_093034.jpg",
-    specialties: "Human rights / Legal assistance",
-    icon: com,
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5P4PqSev1BbYkG9QWpHESahNji46ucPneFhxy4TB-zQ&s",
+    specialties: "Infrastructure / Public works",
+    icon: dpwh,
   },
 ];

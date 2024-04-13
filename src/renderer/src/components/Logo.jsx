@@ -20,7 +20,7 @@ function Logo() {
         </Modal.Open>
         <Modal.Window name={"contacts"}>
           <div>
-            <h1 className="mb-4 text-3xl">Emergecy Contacts</h1>
+            <h1 className="mb-4 text-3xl">Emergency Contacts</h1>
             <div className="grid w-[50vw] min-w-0 grid-cols-3 gap-4 xl:gap-8">
               {contacts.map((contact, index) => (
                 <ContactsCard

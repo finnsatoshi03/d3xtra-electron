@@ -31,7 +31,7 @@ function ContactsCard({
           {specialties}
         </p>
         <div className="flex justify-between">
-          <img src={icon} alt="" className="size-5 xl:size-8" />
+          <img src={icon} alt="" className="h-5 xl:h-8" />
           <button className="inline-flex items-center gap-1 rounded-full bg-white bg-opacity-20 px-1.5 py-0.5 backdrop-blur-sm xl:gap-2 xl:px-2.5 xl:py-1">
             <img src={phone} alt="" className="size-3 xl:size-5" />
             <p className="text-xs xl:text-sm">{number}</p>
