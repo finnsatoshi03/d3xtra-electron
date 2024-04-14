@@ -22,7 +22,7 @@ function Sidebar() {
       </div>
       <div className="mt-6 flex w-full flex-col gap-3 text-[12px] font-bold xl:mt-24 xl:text-sm">
         <Features icon={ObstacleIcon} title={"Obstacles"} />
-        <Features icon={BookmarkIcon} title={"Saved Places"} />
+        {/* <Features icon={BookmarkIcon} title={"Saved Places"} /> */}
       </div>
       <ExtraFeatures />
     </div>
